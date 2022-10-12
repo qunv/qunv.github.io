@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Juantino.Ng</title>
+    <link rel="icon" href="/images/logo.png">
+    <link rel="stylesheet" href="/assets/styte.css">
+    <link rel="stylesheet" href="/assets/prism.css">
+    <link rel="alternate" type="application/rss+xml" title="Juantino.Ng" href="/rss.xml">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+<div class="page-content">
+    <div class="home">
+        <section class="site-header">
+            <h1 class="smallcap">
+                <a class="site-title" href="/">Juantino.Ng</a>
+            </h1>
+            <p class="site-nav">
+                <a href="/">cd~</a> /
+                <a href="/about">about</a> /
+                <a href="/tags">tags</a> /
+                <a href="/rss">rss</a>
+            </p>
+    <h1 class="post-title" itemprop="name headline">Optimization using Bitmask</h1>
+    <div class="post-meta">
+        <div class="post-date">
+            <time datetime="2017-01-15T00:00:00+00:00" itemprop="datePublished">May 22, 2021</time>
+        </div>
+        <div class="post-tag">
+            <i class="fa fa-tag fa-1x" aria-hidden="true"></i>
+                <a href="/tags/optimise" style="color: #aaa">#optimise </a>
+                <a href="/tags/bit" style="color: #aaa">#bit </a>
+        </div>
+    </div>
+        </section>
+        <section class="site-body">
+    <blockquote>
+<p><em>Article inspired by <a href="https://www.ardanlabs.com/blog/2021/04/using-bitmasks-in-go.html">@MikiTebeka</a></em></p>
+</blockquote>
+
+<h3>Introduction</h3>
+
+<p>In my work, I have participated in backend development for Identity Service(IDS) Application
+through which users can register our services for their purposes like OCR, Face Matching,&hellip;
+So I want to design how to store the set of services each user registers.</p>
+
+<p>For simple, imagine the set of service keys are OCR, FM, LC, SCI. The usual way is to use a string array (<code>[]string</code>),
+or a map whose key is string and bool is value (<code>map[string]bool</code>)</p>
+
+<p>Of course, both ways will work, but I found a way that will make storing and processing keys
+cooler and more efficient using <a href="https://en.wikipedia.org/wiki/Mask_(computing)">Bitmark</a></p>
+
+<h3>Interlude</h3>
+
+<p>Let&rsquo;s talk about <code>Bits</code> a bit and understand that computers store a byte (8 bits).</p>
+
+<p>Every bit position perform a power of two.</p>
+
+<pre><code class="language-text">bit     | 2⁷| 2⁶| 2⁵| 2⁴| 2³| 2²| 2¹| 2⁰|
+base 10 |128| 64| 32| 16| 8 | 4 | 2 | 1 |
+</code></pre>
+
+<p>For example, to represent 14, I set bit positions for the numbers 8, 4, 2</p>
+
+<pre><code class="language-text">bit     | 0 | 0 | 0 | 0 | 1 | 1 | 1 | 0 |
+base 10 |128| 64| 32| 16| 8 | 4 | 2 | 1 |
+          0 + 0 + 0 + 0 + 8 + 4 + 2 + 0 = 14
+</code></pre>
+
+<p>Notice that, this encoding schema means the maximal number that can be represented by a byte is <code>255</code>,
+it means all bit positions will be filled by 1, and the sum of all base 10.</p>
+
+<h3>Logical operations</h3>
+
+<p>One of the things that makes magic in the world is <code>Logical operations on bits</code> are <code>AND</code>, <code>OR</code>, <code>NOT</code>, <code>SHIFT LEFT</code>,&hellip;</p>
+
+<p>Let&rsquo;s perform some:</p>
+
+<pre><code class="language-text">| A | B | A&amp;B | A|B | ^A |
+| 0 | 0 |  0  |  0  |  1 |
+| 0 | 1 |  0  |  1  |  1 |
+| 1 | 0 |  0  |  1  |  0 |
+| 1 | 1 |  1  |  1  |  0 |
+</code></pre>
+
+<p>SHIFT LEFT <code>&lt;&lt;</code> will shift all the bits one position to the left.</p>
+
+<pre><code class="language-text">00000011 (3) &lt;&lt; 1
+00000110 (6)
+</code></pre>
+
+<p>As you see above, <code>SHIFT LEFT</code> by 1 will multiply a number by 2, it means <code>2¹</code>
+so <code>SHIFT LEFT</code> by 2 will be <code>2²</code>. Therefore, <code>A &lt;&lt; n = A * (2^n)</code></p>
+
+<p>Similar to <code>SHIFT LEFT</code>, <code>SHIFT RIGHT(&gt;&gt;)</code> will shift all the bits one position to the right, if shift right by
+<code>n</code> will be divided by <code>2^n</code>. Therefore, <code>A &gt;&gt; n = A / (2^n)</code></p>
+
+<pre><code class="language-text">00000110 (6) &gt;&gt; 1
+00000011 (3) 
+</code></pre>
+
+<p><em>Dig deeper</em></p>
+
+<p>To calculate which bits are common between the numbers 5 <code>AND</code> 3 do the following:</p>
+
+<pre><code class="language-text">00000001 AND  (4, 1)
+00000011      (2, 1)
+--------------------
+00000001      (1)
+</code></pre>
+
+<p>To join the bits between the numbers 5 <code>OR</code> 3 do the following.</p>
+
+<pre><code class="language-text">00000101 OR  (4, 1)
+00000011     (2, 1)
+-------------------
+00000111     (4, 2, 1)
+</code></pre>
+
+<h3>Back to start</h3>
+
+<p>As I mentioned at the beginning that I have <code>the set of service keys are OCR, FM, LC, SCI</code></p>
+
+<p>I define the <code>ServiceKeySet</code> using an underlying type <code>uint8</code> (8 bit)</p>
+
+<pre><code class="language-go">type ServiceKeySet uint8
+</code></pre>
+
+<p>Then, I will make the available service keys that I will support as <code>Enum</code>(although Go has not Enum type =D)
+by <code>SHIFT LEFT</code> by 1 (iota in Go)</p>
+
+<pre><code class="language-go">const(
+OCR ServiceKeySet = 1 &lt;&lt; iota // 1
+FM                            // 2
+LC             // 4  
+SCI            // 8
+UnknownService // 16 
+)
+</code></pre>
+
+<p>Above, my implementation will perform service as a number, in order to understand easily, I will represent my service
+keys by nice strings.</p>
+
+<pre><code class="language-go">func (s ServiceKeySet) String() string {
+if s &gt;= UnknownService {
+return fmt.Sprintf(&quot;&lt;unknown service&gt;&quot;)
+}
+
+switch s {
+case OCR:
+return &quot;OCR&quot;
+case FM:
+return &quot;FaceMatching&quot;
+case LC:
+return &quot;LivenessCheck&quot;
+case SCI:
+return &quot;SanityCheckIdCard&quot;
+default:
+var services []string
+for key := OCR; key &lt; UnknownService; key &lt;&lt;= 1 { // multiply by 2 each loop
+if s&amp;key != 0 {
+services = append(services, key.String())
+}
+}
+return strings.Join(services, &quot; - &quot;)	
+}
+}
+</code></pre>
+
+<p>Now, define your own user</p>
+
+<pre><code class="language-go">type User struct {
+Id string
+Services ServiceKeySet
+}
+</code></pre>
+
+<p>Make a function that allows <code>User</code> register service.</p>
+
+<pre><code class="language-go">/*
+   Register will add a key to the bitmark(Services)
+
+
+   u.Services : 00000001 OR  (OCR)
+   service    : 00000100     (LC)
+   -----------------------------------
+   result     : 00000101     (LC, OCR)
+*/
+func (u *User) Register(service ServiceKeySet) {
+u.Services |= service // Join by OR logical
+}
+</code></pre>
+
+<p>By using bitwise <code>AND</code>, we can check for a service in the <code>Services</code>.</p>
+
+<pre><code class="language-go">/*
+   Has will check a key in the bitmark (Services)
+   @return bool
+
+   u.Services : 00000101 AND (LC,OCR)
+   service    : 00000100     (LC)
+   -----------------------------------
+   result     : 00000100     (LC)
+*/
+func (u *User) Has(service ServiceKeySet) bool{
+return u.Services&amp;service != 0
+}
+</code></pre>
+
+<p>Remove a service from <code>Services</code></p>
+
+<pre><code class="language-go">/*
+   Remove will remove a key from bitmark (Services)
+
+   u.Services : 00000101 AND (LC,OCR)
+   ^service   : 11111011     (LC)
+   -----------------------------------
+   result     : 00000001     (OCR)
+*/
+func (u *User) Remove(service ServiceKeySet) {
+u.Services &amp;= ^service
+}
+</code></pre>
+
+<p>Finally initialize a main function to execute the above functions</p>
+
+<pre><code class="language-go">func main() {
+user := User{ Id: &quot;UserId&quot;, Services: OCR }
+user.Register(LC)
+fmt.Println(user.Services)
+fmt.Println(&quot;Has LC service: &quot;, user.Has(LC))
+user.Remove(LC)
+fmt.Println(user.Services)
+}
+</code></pre>
+
+<p>Tada, when running the main function will get expected response.</p>
+
+<pre><code>OCR - LivenessCheck
+Has LC service:  true
+OCR
+</code></pre>
+
+<h3>Memory cost comparison</h3>
+
+<p>Do a little math to compare between <code>[]string</code> and <code>bitmark</code> in terms of memory cost.</p>
+
+<p>Assume that both <code>[]string</code> and <code>bitmark</code> must store 3 elements <code>OCR</code>, <code>FM</code>, <code>LC</code>.</p>
+
+<p>For the string array represented by <code>[]string{&quot;OCR&quot;, &quot;FM&quot;, &quot;LC&quot;}</code>. It&rsquo;s easy to see that we
+needed 3 memory address to store all the elements of our string array (<code>O(n) memory space</code>).</p>
+
+<p><img src="../../../../../images/2021-05-22-bitmark/dsf.png" alt="String mem" /></p>
+
+<p>For bitmark represented by <code>00000111</code> base 2, or 7 base 10, so we only need one memory to store 7 (<code>O(1) memory space</code>).</p>
+
+<h3>Pros and Cons</h3>
+
+<p><strong>Pros</strong></p>
+
+<ul>
+<li><p>Look cool</p></li>
+
+<li><p>Memory cost optimization</p></li>
+
+<li><p>Suitable for collecting problems such as collecting keys</p></li>
+</ul>
+
+<p><strong>Cons</strong></p>
+
+<ul>
+<li><p>Difficult to understand and implement</p></li>
+
+<li><p>Difficult to maintain</p></li>
+
+<li><p>Difficult to control</p></li>
+</ul>
+
+<p>Happy coding :v !</p>
+
+        </section>
+        <div class="copyright">
+            <p>&copy; 2021 <a href="/"><strong>Juantino.Ng</strong></a></p>
+        </div>
+    </div>
+</div>
+<script src="/assets/prism.js"></script>
+</body>
+</html>

@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Juantino.Ng</title>
+    <link rel="icon" href="/images/logo.png">
+    <link rel="stylesheet" href="/assets/styte.css">
+    <link rel="stylesheet" href="/assets/prism.css">
+    <link rel="alternate" type="application/rss+xml" title="Juantino.Ng" href="/rss.xml">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+<div class="page-content">
+    <div class="home">
+        <section class="site-header">
+            <h1 class="smallcap">
+                <a class="site-title" href="/">Juantino.Ng</a>
+            </h1>
+            <p class="site-nav">
+                <a href="/">cd~</a> /
+                <a href="/about">about</a> /
+                <a href="/tags">tags</a> /
+                <a href="/rss">rss</a>
+            </p>
+    <h1 class="post-title" itemprop="name headline">Deploy code using CICD</h1>
+    <div class="post-meta">
+        <div class="post-date">
+            <time datetime="2017-01-15T00:00:00+00:00" itemprop="datePublished">April 08, 2021</time>
+        </div>
+        <div class="post-tag">
+            <i class="fa fa-tag fa-1x" aria-hidden="true"></i>
+                <a href="/tags/deloyment" style="color: #aaa">#deloyment </a>
+                <a href="/tags/cicd" style="color: #aaa">#cicd </a>
+        </div>
+    </div>
+        </section>
+        <section class="site-body">
+    <blockquote>
+<p>Automatic will help us more leisurely</p>
+</blockquote>
+
+<h3>Rambling a little</h3>
+
+<p>As a programmer, I really like creating automated programs and plenty there, it looks magic.</p>
+
+<p>Not long ago, I worked with Tekoda team (not Tokuda :D), to build an application called <code>Àừnhỏ.com</code>. The application
+name sounded like <code>&quot;Holy sh!t, I finally found it&quot;</code> with your surprised face.</p>
+
+<p>I built backend app and whenever I finished coding for any task, and all had to perform the step below to deploy my code
+on docker hub.</p>
+
+<ol>
+<li><p>Docker build with <code>docker build -t IMAGE_NAME:IMAGE_TAG .</code></p></li>
+
+<li><p>Docker tag <code>docker tag IMAGE_ID</code> where <code>IMAGE_ID</code> you can see with command <code>docker image ls</code></p></li>
+
+<li><p>Finally, push my image on my docker hub using <code>docker push</code></p></li>
+</ol>
+
+<p>Not to mention, I had to push my all code on the Github with <code>add</code>, <code>commit</code> and <code>push</code>, it&rsquo;s really boring.</p>
+
+<p>So, I look to CICD as a savior for my problem as a clever way from now.</p>
+
+<h3>Build a magic</h3>
+
+<p>Humm, I don&rsquo;t mention CICD anymore because Google is number one.</p>
+
+<p>I&rsquo;m going to use <code>Golang</code> for this example</p>
+
+<p>First, build a simple program, a file <code>main.go</code>.</p>
+
+<pre><code class="language-go">package main
+
+import (
+	&quot;fmt&quot;
+)
+
+func main() {
+	fmt.Println(&quot;Lookup on the moon&quot;)
+}
+</code></pre>
+
+<p>It&rsquo;s very simple, isn&rsquo;t it? Of course, it&rsquo;s really powerful.</p>
+
+<p>And then, write a <code>Dockerfile</code></p>
+
+<pre><code class="language-dockerfile">FROM golang:alpine as builder
+
+RUN apk update
+
+WORKDIR /app
+
+COPY go.mod go.sum ./
+
+RUN go mod download
+
+COPY . .
+
+RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o main ./cmd/
+
+FROM alpine:latest
+RUN apk --no-cache add ca-certificates
+
+WORKDIR /root/
+
+
+COPY --from=builder /app/main .
+
+EXPOSE 8080
+
+CMD [&quot;./main&quot;]
+</code></pre>
+
+<p>See, I have 2 doses of sedatives. Let&rsquo;s make runner.</p>
+
+<h4>Gitlab</h4>
+
+<p>Gittlab runs CICD by running <code>.gitlab-ci.yml</code></p>
+
+<pre><code class="language-yaml"># We define stages that is going to run whenever my code is pushed on Gitlab
+stages:
+  - build
+  # - test
+  # - deploy
+  # - ...
+
+variables:
+  CONTAINER_IMAGE: $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG
+
+docker build:
+  image: docker:stable
+  stage: build
+  when: on_success
+  services:
+    - name: docker:dind
+      alias: dockerbuild
+  variables:
+    # Tell docker CLI how to talk to Docker daemon; see
+    # https://docs.gitlab.com/ee/ci/docker/using_docker_build.html#use-docker-in-docker-executor
+    DOCKER_HOST: tcp://dockerbuild:2375/
+    # Use the overlayfs driver for improved performance:
+    DOCKER_DRIVER: overlay2
+    DOCKER_TLS_CERTDIR: &quot;&quot;
+  before_script:
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+  script:
+    - docker build -t $CONTAINER_IMAGE .
+    - docker push $CONTAINER_IMAGE
+</code></pre>
+
+<p>All variables with the prefix <code>$</code> is defined on Gitlab -&gt; Settings -&gt; CI/CD -&gt; Variables</p>
+
+<h4>Github</h4>
+
+<p>Different from Gitlab, Github workflow must be run in <code>.github/workflows/yourworkflow.yaml</code></p>
+
+<pre><code class="language-yaml">name: Go
+
+on:
+  push:
+    branches: [ main, feature/cicd ]
+  pull_request:
+    branches: [ main, main, feature/cicd ]
+
+jobs:
+
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Login to Docker Hub
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKER_HUB_USERNAME }}
+          password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
+
+      - name: Set up Docker Buildx
+        id: buildx
+        uses: docker/setup-buildx-action@v1
+
+      - name: Build and push
+        id: docker_build
+        uses: docker/build-push-action@v2
+        with:
+          context: ./
+          file: ./Dockerfile
+          push: true
+          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/webrtc-hubs-state:latest
+
+      - name: Image digest
+        run: echo ${{ steps.docker_build.outputs.digest }}
+</code></pre>
+
+<p>Let&rsquo;s push some code into Github or Gitlab and wait for finished. Open Your <a href="https://hub.docker.com/">Docker hub</a> and
+see result.</p>
+
+        </section>
+        <div class="copyright">
+            <p>&copy; 2021 <a href="/"><strong>Juantino.Ng</strong></a></p>
+        </div>
+    </div>
+</div>
+<script src="/assets/prism.js"></script>
+</body>
+</html>
