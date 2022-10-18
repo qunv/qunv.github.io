@@ -45,15 +45,15 @@
 
 <h3>Introduction</h3>
 
-<p>In my work, I have participated in backend development for Identity Service(IDS) Application
-through which users can register our services for their purposes like OCR, Face Matching,&hellip;
-So I want to design how to store the set of services each user registers.</p>
+<p>In my work, I have participated in backend development for Identity Service(IDS) Application through which users can
+register our services for their purposes like OCR, Face Matching,&hellip; So I want to design how to store the set of
+services each user registers.</p>
 
 <p>For simple, imagine the set of service keys are OCR, FM, LC, SCI. The usual way is to use a string array (<code>[]string</code>),
 or a map whose key is string and bool is value (<code>map[string]bool</code>)</p>
 
-<p>Of course, both ways will work, but I found a way that will make storing and processing keys
-cooler and more efficient using <a href="https://en.wikipedia.org/wiki/Mask_(computing)">Bitmark</a></p>
+<p>Of course, both ways will work, but I found a way that will make storing and processing keys cooler and more efficient
+using <a href="https://en.wikipedia.org/wiki/Mask_(computing)">Bitmark</a></p>
 
 <h3>Interlude</h3>
 
@@ -72,8 +72,8 @@ base 10 |128| 64| 32| 16| 8 | 4 | 2 | 1 |
           0 + 0 + 0 + 0 + 8 + 4 + 2 + 0 = 14
 </code></pre>
 
-<p>Notice that, this encoding schema means the maximal number that can be represented by a byte is <code>255</code>,
-it means all bit positions will be filled by 1, and the sum of all base 10.</p>
+<p>Notice that, this encoding schema means the maximal number that can be represented by a byte is <code>255</code>, it means all bit
+positions will be filled by 1, and the sum of all base 10.</p>
 
 <h3>Logical operations</h3>
 
@@ -135,11 +135,11 @@ so <code>SHIFT LEFT</code> by 2 will be <code>2²</code>. Therefore, <code>A &lt
 by <code>SHIFT LEFT</code> by 1 (iota in Go)</p>
 
 <pre><code class="language-go">const(
-OCR ServiceKeySet = 1 &lt;&lt; iota // 1
-FM                            // 2
-LC             // 4  
-SCI            // 8
-UnknownService // 16 
+    OCR ServiceKeySet = 1 &lt;&lt; iota // 1
+    FM                            // 2
+    LC             // 4  
+    SCI            // 8
+    UnknownService // 16 
 )
 </code></pre>
 
@@ -147,36 +147,36 @@ UnknownService // 16
 keys by nice strings.</p>
 
 <pre><code class="language-go">func (s ServiceKeySet) String() string {
-if s &gt;= UnknownService {
-return fmt.Sprintf(&quot;&lt;unknown service&gt;&quot;)
-}
+    if s &gt;= UnknownService {
+        return fmt.Sprintf(&quot;&lt;unknown service&gt;&quot;)
+    }
 
-switch s {
-case OCR:
-return &quot;OCR&quot;
-case FM:
-return &quot;FaceMatching&quot;
-case LC:
-return &quot;LivenessCheck&quot;
-case SCI:
-return &quot;SanityCheckIdCard&quot;
-default:
-var services []string
-for key := OCR; key &lt; UnknownService; key &lt;&lt;= 1 { // multiply by 2 each loop
-if s&amp;key != 0 {
-services = append(services, key.String())
-}
-}
-return strings.Join(services, &quot; - &quot;)	
-}
+    switch s {
+        case OCR:
+            return &quot;OCR&quot;
+        case FM:
+            return &quot;FaceMatching&quot;
+        case LC:
+            return &quot;LivenessCheck&quot;
+        case SCI:
+            return &quot;SanityCheckIdCard&quot;
+        default:
+            var services []string
+            for key := OCR; key &lt; UnknownService; key &lt;&lt;= 1 { // multiply by 2 each loop
+                if s&amp;key != 0 {
+                    services = append(services, key.String())
+                }
+            }
+            return strings.Join(services, &quot; - &quot;)	
+    }
 }
 </code></pre>
 
 <p>Now, define your own user</p>
 
 <pre><code class="language-go">type User struct {
-Id string
-Services ServiceKeySet
+    Id string
+    Services ServiceKeySet
 }
 </code></pre>
 
@@ -192,7 +192,7 @@ Services ServiceKeySet
    result     : 00000101     (LC, OCR)
 */
 func (u *User) Register(service ServiceKeySet) {
-u.Services |= service // Join by OR logical
+    u.Services |= service // Join by OR logical
 }
 </code></pre>
 
@@ -208,7 +208,7 @@ u.Services |= service // Join by OR logical
    result     : 00000100     (LC)
 */
 func (u *User) Has(service ServiceKeySet) bool{
-return u.Services&amp;service != 0
+    return u.Services&amp;service != 0
 }
 </code></pre>
 
@@ -223,19 +223,19 @@ return u.Services&amp;service != 0
    result     : 00000001     (OCR)
 */
 func (u *User) Remove(service ServiceKeySet) {
-u.Services &amp;= ^service
+    u.Services &amp;= ^service
 }
 </code></pre>
 
 <p>Finally initialize a main function to execute the above functions</p>
 
 <pre><code class="language-go">func main() {
-user := User{ Id: &quot;UserId&quot;, Services: OCR }
-user.Register(LC)
-fmt.Println(user.Services)
-fmt.Println(&quot;Has LC service: &quot;, user.Has(LC))
-user.Remove(LC)
-fmt.Println(user.Services)
+    user := User{ Id: &quot;UserId&quot;, Services: OCR }
+    user.Register(LC)
+    fmt.Println(user.Services)
+    fmt.Println(&quot;Has LC service: &quot;, user.Has(LC))
+    user.Remove(LC)
+    fmt.Println(user.Services)
 }
 </code></pre>
 
@@ -252,8 +252,8 @@ OCR
 
 <p>Assume that both <code>[]string</code> and <code>bitmark</code> must store 3 elements <code>OCR</code>, <code>FM</code>, <code>LC</code>.</p>
 
-<p>For the string array represented by <code>[]string{&quot;OCR&quot;, &quot;FM&quot;, &quot;LC&quot;}</code>. It&rsquo;s easy to see that we
-needed 3 memory address to store all the elements of our string array (<code>O(n) memory space</code>).</p>
+<p>For the string array represented by <code>[]string{&quot;OCR&quot;, &quot;FM&quot;, &quot;LC&quot;}</code>. It&rsquo;s easy to see that we needed 3 memory address to
+store all the elements of our string array (<code>O(n) memory space</code>).</p>
 
 <p><img src="../../../../../images/2021-05-22-bitmark/dsf.png" alt="String mem" /></p>
 
