@@ -5,6 +5,7 @@
 - [Tự sự](#t%E1%BB%B1-s%E1%BB%B1)
 - [10 năm](#10-n%C4%83m)
 - [Chốn nào](#ch%E1%BB%91n-n%C3%A0o)
+- [LTT 24](#ltt-24)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -49,7 +50,7 @@ Trên quãng đường anh đi
 
 ### Chốn nào
 
-Nếu biết ngày mai em lấy chông
+Nếu biết ngày mai em lấy chồng
 
 Thì nay anh đã chẳng đợi trông
 
@@ -66,3 +67,23 @@ Mai rồi em có qua bên ấy
 Liệu rằng còn nhớ chốn này không?
 
 *16/02/2022*
+
+### LTT 24
+
+Thanh xuân như một ly trà
+
+Đi về Giáo nghĩa để mà yêu nhau
+
+Ông yêu bà với trầu cau
+
+Tình anh đủ sắc đủ màu yêu em
+
+Chờ chi nữa đến mà xem
+
+Hai tư truyền thống lễ đem ân tình
+
+Thôn Đoàn Kết, xã Bình Minh
+
+Sinh viên Công Giáo Thái Bình thân thương
+
+*LTT24 - SVCG Thái Bình - Hà Nội*
