@@ -1,28 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
 <channel>
-<title>Juantino.Ng</title>
+<title>Juantino Ng</title>
 <description>For the Future</description>
 <link>https://qunv.github.io/</link>
 <item>
-<title>Optimization using Bitmask</title>
-<link>https://qunv.github.io/Posts/2021/05/22/Optimization-using-Bitmask</link>
+<title>Bitmark hay này</title>
+<link>https://qunv.github.io/Posts/2021/05/22/Bitmark-hay-này</link>
 </item>
 <item>
 <title>Deploy code using CICD</title>
 <link>https://qunv.github.io/Posts/2021/04/08/Deploy-code-using-CICD</link>
 </item>
 <item>
-<title>Tổng hợp kiến thức về Performance Test</title>
-<link>https://qunv.github.io/Posts/2021/03/25/Tổng-hợp-kiến-thức-về-Performance-Test</link>
+<title>Tổng hợp vài thứ hay hay về Performance Test</title>
+<link>https://qunv.github.io/Posts/2021/03/25/Tổng-hợp-vài-thứ-hay-hay-về-Performance-Test</link>
 </item>
 <item>
-<title>Tổng hợp nhưng thứ tôi biết về Apache Kafka</title>
-<link>https://qunv.github.io/Posts/2021/01/21/Tổng-hợp-nhưng-thứ-tôi-biết-về-Apache-Kafka</link>
+<title>Tổng hợp vài thứ về Apache Kafka</title>
+<link>https://qunv.github.io/Posts/2021/01/21/Tổng-hợp-vài-thứ-về-Apache-Kafka</link>
 </item>
 <item>
-<title>Rambling a little</title>
-<link>https://qunv.github.io/Posts/2020/10/15/Rambling-a-little</link>
+<title>Lan man một tý</title>
+<link>https://qunv.github.io/Posts/2020/10/15/Lan-man-một-tý</link>
 </item>
 </channel>
 </rss>

@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Juantino Ng</title>
+    <link rel="icon" href="/images/logo.png">
+    <link rel="stylesheet" href="/assets/styte.css">
+    <link rel="stylesheet" href="/assets/prism.css">
+    <link rel="alternate" type="application/rss+xml" title="Juantino Ng" href="/rss.xml">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+<div class="page-content">
+    <div class="home">
+        <section class="site-header">
+            <h1 class="smallcap">
+                <a class="site-title" href="/">Juantino Ng</a>
+            </h1>
+            <p class="site-nav">
+                <a href="/">cd~</a> /
+                <a href="/about">about</a> /
+                <a href="/tags">tags</a> /
+                <a href="/rss">rss</a>
+            </p>
+    <h1 class="post-title" itemprop="name headline">Bitmark hay này</h1>
+    <div class="post-meta">
+        <div class="post-date">
+            <time datetime="2017-01-15T00:00:00+00:00" itemprop="datePublished">May 22, 2021</time>
+        </div>
+        <div class="post-tag">
+            <i class="fa fa-tag fa-1x" aria-hidden="true"></i>
+                <a href="/tags/optimise" style="color: #aaa">#optimise </a>
+                <a href="/tags/bit" style="color: #aaa">#bit </a>
+        </div>
+    </div>
+        </section>
+        <section class="site-body">
+    <div class="post-content">
+        <h3>Là lá la là la</h3>
+
+<p>Thật sự thì hồi đi học cũng học nhiều mấy thứ liên quan đến <code>bit</code>, cơ mà cho để nay thì chữ thầy chắc em gửi lại
+thầy rồi <img src="https://cdn3.emoji.gg/emojis/2324-pepelaugh.png" class="emoji">. Cho đến một ngày&hellip;
+vô tình đọc được một bài viết của bác <a href="https://www.ardanlabs.com/blog/2021/04/using-bitmasks-in-go.html">@MikiTebeka</a>
+Nên em sợ bác xóa bài cho nên em xin phép <code>make a note</code> một vài thứ về <a href="https://en.wikipedia.org/wiki/Mask_(computing)">Bitmark</a></p>
+
+<h3>Tự giải thích một vài khái niệm</h3>
+
+<p>Nói về <code>bit</code>, ở đây được hiểu là một khái niệm thuộc về máy tính, máy tính hiểu được chúng ta là do nó đã translate sang
+<code>ngôn ngữ</code> của bản thân nó <code>bit</code>, và dị lắm, mỗi bit thì mang một trong 2 giá trị <code>0</code> hoặc <code>1</code>.
+Và mỗi vị trí bit thực hiện một lũy thừa của 2</p>
+
+<pre><code class="language-text">bit     | 2⁷| 2⁶| 2⁵| 2⁴| 2³| 2²| 2¹| 2⁰|
+base 10 |128| 64| 32| 16| 8 | 4 | 2 | 1 |
+</code></pre>
+
+<p>Ví dụ về số thập phân đi, để đại điện số 14, thì các vị trí bít được set là 8, 4, 2</p>
+
+<pre><code class="language-text">bit     | 0 | 0 | 0 | 0 | 1 | 1 | 1 | 0 |
+base 10 |128| 64| 32| 16| 8 | 4 | 2 | 1 |
+          0 + 0 + 0 + 0 + 8 + 4 + 2 + 0 = 14
+</code></pre>
+
+<p>Lưu ý rằng, scheme ở trên có nghĩa là số tối đa có thể được biểu thị bằng một byte là <code>255</code>, nó có nghĩa là tất cả các bit
+vị trí sẽ được điền bởi 1 và tổng của tất cả cơ số 10.</p>
+
+<h3>Các phép toán logic</h3>
+
+<p>Có một số thứ kiến các developer trở thành các nhà ảo thuật <img src="https://cdn3.emoji.gg/emojis/7694-pepe-fla.png" class="emoji"> đấy là các pháp toán trên bit: <code>AND</code>, <code>OR</code>, <code>NOT</code>, <code>SHIFT LEFT</code>,&hellip;</p>
+
+<p>Lướt qua một số phép toán:</p>
+
+<pre><code class="language-text">| A | B | A&amp;B | A|B | ^A |
+| 0 | 0 |  0  |  0  |  1 |
+| 0 | 1 |  0  |  1  |  1 |
+| 1 | 0 |  0  |  1  |  0 |
+| 1 | 1 |  1  |  1  |  0 |
+</code></pre>
+
+<p>SHIFT LEFT <code>&lt;&lt;</code> dịch các bit hiện tại sang bên trái 1 đơn vị.</p>
+
+<pre><code class="language-text">00000011 (3) &lt;&lt; 1
+00000110 (6)
+</code></pre>
+
+<p>Như bên trên, <code>SHIFT LEFT</code> có nghĩa nhân số hiện tại với <code>2¹</code>
+do đó công thức là <code>A &lt;&lt; n = A * (2^n)</code></p>
+
+<p>Tương tự như <code>SHIFT LEFT</code>, <code>SHIFT RIGHT(&gt;&gt;)</code> sẽ dịch các bít hiện tại sang phải 1 đơn vị,
+và công thức là, <code>A &gt;&gt; n = A / (2^n)</code></p>
+
+<pre><code class="language-text">00000110 (6) &gt;&gt; 1
+00000011 (3) 
+</code></pre>
+
+<p><em>Đi sâu hơn chút</em></p>
+
+<p>Để tính toán bit nào là chung giữa các số 5 <code>AND</code> 3:</p>
+
+<pre><code class="language-text">00000001 AND  (4, 1)
+00000011      (2, 1)
+--------------------
+00000001      (1)
+</code></pre>
+
+<p>Để join bit chung giữa 5 <code>OR</code> 3:</p>
+
+<pre><code class="language-text">00000101 OR  (4, 1)
+00000011     (2, 1)
+-------------------
+00000111     (4, 2, 1)
+</code></pre>
+
+<blockquote>
+<p>Phần hay nhất xin anh em đọc ở vài viết của bác <a href="https://www.ardanlabs.com/blog/2021/04/using-bitmasks-in-go.html">@MikiTebeka</a></p>
+</blockquote>
+
+<h3>So sánh một chút về chi phí bộ nhớ</h3>
+
+<p>Làm một phép so sánh nhỏ khi dùng <code>[]string</code> và <code>bitmark</code> về chi phí bộ nhớ.</p>
+
+<p>Giả định là cả 2 đều phải lưu 3 giá trị <code>OCR</code>, <code>FM</code>, <code>LC</code>.</p>
+
+<p>Dĩ nhiên rồi array được đại diện bởi <code>[]string{&quot;OCR&quot;, &quot;FM&quot;, &quot;LC&quot;}</code>. Thật dễ để thấy anh em cần 3 chi phí để lưu các giá trị này
+tức (<code>O(n) memory space</code>).</p>
+
+<p><img src="../../../../../images/2021-05-22-bitmark/dsf.png" alt="String mem" /></p>
+
+<p>Đối với bitmark thì là <code>00000111</code> cơ số 2, hay 7 cho cơ số 10 10, do đó chi phí là 1 (<code>O(1) memory space</code>).</p>
+
+<h3>Pros and Cons</h3>
+
+<p><strong>Pros</strong></p>
+
+<ul>
+<li><p>Ngầu chứ</p></li>
+
+<li><p>Tối ưu về bộ nhớ</p></li>
+
+<li><p>Phù hợp với các bài toán thu thập,&hellip;</p></li>
+</ul>
+
+<p><strong>Cons</strong></p>
+
+<ul>
+<li>Khó hiểu và khó maintain</li>
+</ul>
+
+<h3>Cuối cùng thì&hellip;!</h3>
+
+<p>Bitmark hay đấy, nhưng mới áp dụng được có 1 lần <img src="https://cdn3.emoji.gg/emojis/9529-pepe.png" class="emoji"></p>
+
+<p>Happy coding :v !</p>
+
+    </div>
+        </section>
+        <div class="copyright">
+            <p>&copy; 2021 <a href="/"><strong>Juantino Ng</strong></a></p>
+        </div>
+    </div>
+</div>
+<script src="/assets/prism.js"></script>
+</body>
+</html>

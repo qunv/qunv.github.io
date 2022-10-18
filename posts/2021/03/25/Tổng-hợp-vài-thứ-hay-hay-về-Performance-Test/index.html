@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Juantino Ng</title>
+    <link rel="icon" href="/images/logo.png">
+    <link rel="stylesheet" href="/assets/styte.css">
+    <link rel="stylesheet" href="/assets/prism.css">
+    <link rel="alternate" type="application/rss+xml" title="Juantino Ng" href="/rss.xml">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+<div class="page-content">
+    <div class="home">
+        <section class="site-header">
+            <h1 class="smallcap">
+                <a class="site-title" href="/">Juantino Ng</a>
+            </h1>
+            <p class="site-nav">
+                <a href="/">cd~</a> /
+                <a href="/about">about</a> /
+                <a href="/tags">tags</a> /
+                <a href="/rss">rss</a>
+            </p>
+    <h1 class="post-title" itemprop="name headline">Tổng hợp vài thứ hay hay về Performance Test</h1>
+    <div class="post-meta">
+        <div class="post-date">
+            <time datetime="2017-01-15T00:00:00+00:00" itemprop="datePublished">March 25, 2021</time>
+        </div>
+        <div class="post-tag">
+            <i class="fa fa-tag fa-1x" aria-hidden="true"></i>
+                <a href="/tags/testing" style="color: #aaa">#testing </a>
+                <a href="/tags/self" style="color: #aaa">#self </a>
+        </div>
+    </div>
+        </section>
+        <section class="site-body">
+    <div class="post-content">
+        <blockquote>
+<p>Tổng hợp từ nhiều nguồn.</p>
+</blockquote>
+
+<h3>Humm&hellip;!</h3>
+
+<p>Chắc anh em cũng biết, tôi xuất thân từ con nhà nông, ra ngoài đời làm công
+việc <code>dọn vệ sinh</code> <img src="https://cdn3.emoji.gg/emojis/9204_PepeSad.png" class="emoji">,
+Mà tại sao tôi lại viết về <code>Performance Test</code>. Thật ra hồi còn làm ở công ty Y, bắt buộc phải có các metrics về
+performance test
+mà team lại thiếu người làm nên tôi bị bếch đi nghiên cứu rồi làm đấy. Nên ở nơi đây tôi sẽ chia sẻ niềm đau của mình
+cho anh em
+<img src="https://cdn3.emoji.gg/emojis/2737-chill.png" class="emoji"></p>
+
+<h3>Performance test là gì?</h3>
+
+<p>Mục đích: Để xác định hoặc xác thực tốc độ, khả năng mở rộng và/hoặc độ tin cậy của hệ thống.</p>
+
+<p>Notes: Một performance test là một kĩ thuật test để xác định hoặc xác thực các đặc trưng về khả năng đáp ứng, tốc độ,
+khả năng mở rộng và/hoặc độc tin cậy của hệ thống dưới dạng test.</p>
+
+<h3>Đủ các thể loại Performance test</h3>
+
+<p>Một số loại performace test thường dùng.</p>
+
+<table>
+<thead>
+<tr>
+<th>Loại</th>
+<th>Mục đích</th>
+<th>Chi Tiết</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>Load test</td>
+<td>Để xác thực hệ hành vi của hệ thông dưới các diều kiện tải bình thường và cao điểm</td>
+<td><ul><li>Load testing được tiến hành để các định xem hệ thống có đám ứng được mục tiêu về hiệu suất mong muốn. Các mục tiêu hiệu suất này thường được quy định trong thỏa thuận dịch vụ (SLA). Một load test cho phép do response times, throughput, rates, và resource - utilization levels, và để xác định break point trong hệ thống, giả định rằng break point này xuất hiện dưới tải cao nhất.</li><li>Kiểm tra độ bền của hệ thống (<b>Soak testing</b>) là một tập các load testing. Môt Soak testing là một loại của performance testing tập trung vào xác định hoặc xác thực các đặc tính hiệu suất của hệ thống dưới test khi phải tuân theo khối lượng công việc và khối lượng đấy tải dự kiến trong quá trình hoạt động trong thời gian dài</li><li><b>Soak testing</b> có thể được sử dụng để tính toán Mean Time Between Failure (MTPF), Mean Time to Failure (MTTF) và các metrics tương tự</li></ul></td>
+</tr>
+
+<tr>
+<td>Stress test</td>
+<td>Để xác định hoặc xác thực hành vi hệ thống khi bị đấy ra ngoài điều kiện tải bình thường và cao điểm</td>
+<td><ul><li>Mục tiêu của Stress Test là phát hiện ra các lỗi hệ thống chỉ xuất hiện trong điều kiện tải cao. Những lỗi này có thể bao gồm những thứ như vấn đề đồng bộ hóa, race conditions và rò rỉ bộ nhớ. Stress test cho phép bạn xác định điểm yếu của hệ thống và hiển thị cách hệ thống hoạt động trong điều kiện tải khắc nghiệt.</li><li><b>Spike test</b> là một loại của Stress test. Spike test là một loại performance test tập trung vào việc xác định hoặc xác nhận các đặc tính hoạt động của hệ thống cần test khi chịu các kịch bản mô phỏng khối lượng công việc và khối lượng tải liên tục tăng lên vượt ngoài khả năng hoạt động dự kiến trong thời gian ngắn.</li><li><b>Biggest challenge:</b> Đảm bảo hệ thống vẫn bảo mật các dữ liệu nhạy cảm sau sự cố. Nếu một Stress test thành công, hệ thóng sẽ trở lại bình thường cùng với tất cả các thành phần của nó sau sự cố khủng khiếp nhất.</li></ul></td>
+</tr>
+
+<tr>
+<td>Capacity test</td>
+<td>Để xác định bao nhiêu user hoặc transations của hệ thống nhất định hỗ trợ nhưng vẫn đáp ứng được mục tiêu hiệu suất</td>
+<td><ul><li>Capacity test được tiến hành cùng với việc lập kế hoạch cho sự phát triển trong tương lai, chẳng hạn như tăng user base hoặc tăng khối lượng dữ liệu. Ví dụ: để đáp ứng các tải trong tương lai, cần biết có bao nhiêu tài nguyên bổ sung (như dung lượng bộ xử lý, sử dụng bộ nhớ, dung lượng đĩa hoặc băng thông mạng) cần thiết để hỗ trợ các mức sử dụng trong tương lai.</li><li>Capacity test giúp xác nhận một scaling strategy để xác định liệu hệ thống có nên scale up hoặc scale out</li></ul></td>
+</tr>
+</tbody>
+</table>
+
+<h3>Performance test metrics</h3>
+
+<ol>
+<li><p>Response time</p></li>
+
+<li><p>Component response times</p></li>
+
+<li><p>Resource utilization&rsquo;s</p></li>
+
+<li><p>Volumes, capacities and rates</p></li>
+
+<li><p>Trends</p></li>
+</ol>
+
+<h3>Cần chuẩn bị nhưng gì?</h3>
+
+<ol>
+<li><p><code>Identify the Test Environment</code>. Xác định môi trường vật lý cho việc test và môi trường prod cũng như tools và tài
+nguyên sẵn có đến nhóm test. Môi trường vật lý bao gồm phần cứng, phần mềm, và cấu hình network. Có hiểu biết về môi
+trường test cho phép lên kế hoạch và thiết kế một cách hiệu quả hơn và giúp xác định sớm các vấn đề của project.
+Trong một số tình huống, process này cần được xem lại trong toàn bộ vòng đời của dự án.</p></li>
+
+<li><p><code>Identify Performance Acceptance Criteria</code>. Xác định response time, throughput, và các mục tiêu và ràng buộc về tài
+nguyên. Nói chung, response time là một user concern. throughput lag một business concern và resource là system
+concern. Chú ý rằng việc test có thể không đáp ứng được mục tiêu.</p></li>
+
+<li><p><code>Plan and Design Test</code>: Xác định các kịch bản chính, xác định sự thay đổi của người dùng đại diện (CCU) và làm thế
+nào để mô phỏng sự thay đổi đó, định nghĩa dữ liệu test và thiết lập các metrics cần thu thập. Thống nhất lại các
+thông tin thành một hoặc nhiều mô hình của hệ thống sử dụng để thực thi và phân tích.</p></li>
+
+<li><p><code>Config the Test Environment</code>. Chuẩn bị môi trường test , tools, và các tài nguyên cần thiết để thực thi mỗi kịch
+bản (hay chiến lược) như tính năng và các thành phần có sẵn để test. Đảm bảo rằng môi trường test là công cụ để giám
+sát tài nguyên là cần thiết.</p></li>
+
+<li><p><code>Implement the Testing Design</code>. Phát triển các bài kiểm tra hiệu suất phù hợp với thiết kế kiểm tra.</p></li>
+
+<li><p><code>Execute the Test</code>. Chạy và giám sát các bài kiểm tra của bạn. Xác thực các thử nghiệm, dữ liệu thử nghiệm và thu
+thập kết quả. Thực hiện các thử nghiệm đã được xác thực để phân tích trong khi theo dõi thử nghiệm và môi trường thử
+nghiệm.</p></li>
+
+<li><p><code>Analyze Results, Report and Retest</code></p></li>
+</ol>
+
+<h3>Công Thức tính Performance test</h3>
+
+<p>Một số metrics chủ yếu và công thức tính cần quan tâm khi thực hiện performance testing.</p>
+
+<p>Quy ước:</p>
+
+<p><code>Values</code> là tập thời gian phản hồi của từng request,</p>
+
+<p><code>C</code> là số lượng request xử lý</p>
+
+<p><code>T</code> là tổng thời gian xử lý request</p>
+
+<p><code>S</code> là tổng số request success</p>
+
+<p><code>E</code> là tổng số request error</p>
+
+<blockquote>
+<p>Công thức này được tìm được ở <a href="https://k6.io">K6</a></p>
+</blockquote>
+
+<table>
+  <thead>
+    <tr>
+      <th>Metrics</th>
+      <th>Formula</th>
+      <th>Notes</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Response Time</td>
+      <td>T</td>
+      <td>Là thời gian phản hồi của hệ thống từ lúc VUs gửi request tới lúc nhận được phản hồi.</td>
+    </tr>
+    <tr>
+      <td>Min</td>
+      <td>min(values)</td>
+      <td>Là thời gian phải hồi nhỏ nhất trong tập thời gian phản hồi</td>
+    </tr>
+    <tr>
+      <td>Avg</td>
+      <td>T / C </td>
+      <td>Thời gian phản hồi trung bình</td>
+    </tr>
+    <tr>
+      <td>Med</td>
+      <td>
+        <ul>
+            <li>Nếu C & 0x01 = 0 thì med = Values[C/2-1] + Values[C/2]</li>
+            <li>Nếu C & 0x01 != 0 thì med = Values[C/2]</li>
+        </ul>
+      </td>
+      <td>median time of values</td>
+    </tr>
+    <tr>
+      <td>P(n)</td>
+      <td>
+        <ul>
+            <li>Sắp xếp values tăng dần</li>
+            <li>i = (n/100) * (c - 1.0)</li>
+            <li>j = Values[floor(i)]</li>
+            <li>k = Values[ceil(i)]</li>
+            <li>f = i - floor(i)</li>
+        </ul>
+        => P(n) = i+(k-j)*f
+      </td>
+      <td>
+        Percentile là một phép do về mặt thống kê. cho biết n phân trăm response time tốt hơn hoặc bằng giá trị tính toán được.
+        <ul>
+            <li>floor(2.4) = [2.4] = 2</li>
+            <li>ceil(2.4) = [2.4] = 3</li>
+        </ul>
+      </td>
+    </tr>
+    <tr>
+      <td>Request</td>
+      <td>C</td>
+      <td>Tổng số request được tạo trong T time</td>
+    </tr>
+    <tr>
+      <td>TPS</td>
+      <td>C / T</td>
+      <td>Số request xử lý được trong 1s</td>
+    </tr>
+    <tr>
+      <td>Successes</td>
+      <td>S * 100 / C </td>
+      <td>Tỉ lệ phần trăm success response trên tổng số request</td>
+    </tr>
+    <tr>
+      <td>Errors</td>
+      <td>E * 100 / C </td>
+      <td>Tỉ lệ phần trăm error response trên tổng số request</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3>Một vài cách đánh giá về hệ thống sau khi thực hiện xong Performance test</h3>
+
+<p>Một cách tiếp cận để xác định có hệ thống có chạy ổn định hay không để hợp nhất các số liệu là chạy ít nhất một kịch bản
+5 lần và áp dụng các quy tắc bên dưới.</p>
+
+<ul>
+<li><p>Nếu nhiều hơn <code>20%</code> hoặc một trong <code>5 lần</code> chạy có kết quả thực thi có vẻ không giống với phần còn lại thì thường có
+gì đó không ổn với môi trường thử nghiệm, ứng dụng hoặc bản thân ứng dụng test.</p></li>
+
+<li><p>Nếu mỗi thời gian trong 1 lần thử nghiệm cao hơn hoặc thấp hơn đáng kể trên biểu đồ so với kết quả của tất cả các lần
+thực thi trong những lần khác thì nó không đúng về mặt thống kê, suy ra hệ thống có vấn đề.</p></li>
+
+<li><p>Nếu 1 giá trị <code>P95</code> của bất kì việc thực thi test nào lớn hơn giá trị lớn nhất hoặc nhỏ hơn giá trị nhỏ nhất của bất
+kì kịch bản test nào thì nó không đúng về mặt thống kê.</p></li>
+
+<li><p>Nếu thời gian duy nhất trong quá trình thực thi test cao hơn hoặc thấp hơn đáng kể trên biểu đồ so với tất cả các kết
+quả còn lại của quá trình thực thi kiểm tra, nhưng kết quả cho thấy tất cả thời gian còn lại trong quá trình thực thi
+kiểm tra đó thì không.</p></li>
+</ul>
+
+<h3>Report</h3>
+
+<p>Dưới đây là dữ liệu được báo cáo thường xuyên nhất:</p>
+
+<ol>
+<li>End user response times</li>
+</ol>
+
+<p>Considerations</p>
+
+<pre><code>- Loại bỏ các ngoại lệ trước khi báo cáo
+
++ Đảm bảo các dữ liệu thống kê được báo cáo rõ ràng. Ví dụ về sự khác nhau giữa P90 và giá trị trung bình (avg) cho
+  thấy vấn đề của hệ thống.
+
+* Báo cáo các giá trị ngoại lệ được bỏ qua
+</code></pre>
+
+<ol>
+<li>Resource utilizations</li>
+</ol>
+
+<p>Các báo cáo về tài nguyên phần cứng được báo cáo về lời nói hoặc tường thuật</p>
+
+<p>Additional Considerations</p>
+
+<pre><code>- Biết khi nào báo cáo tất cả dữ liệu, khi nào cần tóm tắt. Thông thường để đơn giản chỉ cần báo cáo giá trị đạt
+  đỉnh khi monitor.
+</code></pre>
+
+<ol>
+<li><p>Volumes, capacities and rates</p></li>
+
+<li><p>Component response times</p></li>
+
+<li><p>Trends</p></li>
+</ol>
+
+<h3>Các câu hỏi cần được trả lời sau khi thực thiện performance test</h3>
+
+<ol>
+<li><p>All Roles</p>
+
+<ul>
+<li><p>Is performance getting better or worse?</p></li>
+
+<li><p>Have we met the requirements/service level agreements (SLAs)?</p></li>
+
+<li><p>What reports are available?</p></li>
+
+<li><p>How frequently can I get reports?</p></li>
+
+<li><p>Can I get a report with more/less detail?</p></li>
+</ul></li>
+
+<li><p>Executive Stakeholders</p>
+
+<ul>
+<li><p>Is this ready to ship?</p></li>
+
+<li><p>How will these results relate to production?</p></li>
+
+<li><p>How much confidence should I have in these results?</p></li>
+
+<li><p>What needs to be done to get this ready to ship?</p></li>
+
+<li><p>Is the performance testing proceeding as anticipated?</p></li>
+
+<li><p>Is the performance testing adding value?</p></li>
+</ul></li>
+
+<li><p>Project - Level Managers</p>
+
+<ul>
+<li><p>Are performance issues being detected efficiently?</p></li>
+
+<li><p>Are performance issues being resolved efficiently?</p></li>
+
+<li><p>What performance testing should we be conducting that we currently are not?</p></li>
+
+<li><p>What performance testing are we currently doing that is not adding value?</p></li>
+
+<li><p>Are there currently any blockers? If so, what are they?</p></li>
+</ul></li>
+
+<li><p>Technical Team Members</p>
+
+<ul>
+<li><p>What do these results mean to my specialty/focus area?</p></li>
+
+<li><p>Where can I go to see the results for the last test?</p></li>
+
+<li><p>Where can I go to get the raw data?</p></li>
+
+<li><p>Can you capture metric X during the next test run?</p></li>
+</ul></li>
+</ol>
+
+<h3>What does the report need?</h3>
+
+<ol>
+<li><p>Raw data display</p>
+
+<ul>
+<li><p>Baseline</p></li>
+
+<li><p>Benchmark</p></li>
+
+<li><p>Scalability</p></li>
+
+<li><p>Any other user-experience-based test</p></li>
+</ul></li>
+
+<li><p>Data storage</p>
+
+<ul>
+<li><p>Spreadsheets</p></li>
+
+<li><p>Text files</p></li>
+
+<li><p>Data collection tool</p></li>
+</ul></li>
+
+<li><p>Technical Reports</p>
+
+<ul>
+<li><p>Description of the test, including workload model and test environment</p></li>
+
+<li><p>Easily digestible data with minimal pre-processing</p></li>
+
+<li><p>Access to the complete data set and test conditions</p></li>
+
+<li><p>Short statements of observations, concerns, questions, and requests for collaboration</p></li>
+
+<li><p>Include:</p>
+
+<ul>
+<li><p>Scatter plots</p></li>
+
+<li><p>Pareto charts</p></li>
+
+<li><p>Trend charts</p></li>
+
+<li><p>Summary spreadsheets</p></li>
+</ul></li>
+</ul></li>
+</ol>
+
+<h3>Cuối cùng thì&hellip;!</h3>
+
+<p>Thành thật là performance test khá là hay, có thể sẽ giúp anh em tăng lương đấy <img src="https://cdn3.emoji.gg/emojis/5408-kekez.png" class="emoji"></p>
+
+    </div>
+        </section>
+        <div class="copyright">
+            <p>&copy; 2021 <a href="/"><strong>Juantino Ng</strong></a></p>
+        </div>
+    </div>
+</div>
+<script src="/assets/prism.js"></script>
+</body>
+</html>

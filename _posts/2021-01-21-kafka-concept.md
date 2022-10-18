@@ -1,6 +1,8 @@
-[comment]: <> (Tổng hợp nhưng thứ tôi biết về Apache Kafka)
+[comment]: <> (Tổng hợp vài thứ về Apache Kafka)
 
 [comment]: <> (event-streaming)
+
+> Tổng hợp từ nhiều nguồn
 
 ### Kafka là gì?
 

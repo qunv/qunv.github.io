@@ -1,63 +1,35 @@
-[comment]: <> (Tổng hợp kiến thức về Performance Test)
+[comment]: <> (Tổng hợp vài thứ hay hay về Performance Test)
 
 [comment]: <> (testing,self)
 
-> Tổng hợp kiến thức về Performance test.
+> Tổng hợp từ nhiều nguồn.
 
-### What is performance testing?
+### Humm...!
+
+Chắc anh em cũng biết, tôi xuất thân từ con nhà nông, ra ngoài đời làm công
+việc `dọn vệ sinh` <img src="https://cdn3.emoji.gg/emojis/9204_PepeSad.png" class="emoji">,
+Mà tại sao tôi lại viết về `Performance Test`. Thật ra hồi còn làm ở công ty Y, bắt buộc phải có các metrics về
+performance test
+mà team lại thiếu người làm nên tôi bị bếch đi nghiên cứu rồi làm đấy. Nên ở nơi đây tôi sẽ chia sẻ niềm đau của mình
+cho anh em
+<img src="https://cdn3.emoji.gg/emojis/2737-chill.png" class="emoji">
+
+### Performance test là gì?
 
 Mục đích: Để xác định hoặc xác thực tốc độ, khả năng mở rộng và/hoặc độ tin cậy của hệ thống.
 
 Notes: Một performance test là một kĩ thuật test để xác định hoặc xác thực các đặc trưng về khả năng đáp ứng, tốc độ,
 khả năng mở rộng và/hoặc độc tin cậy của hệ thống dưới dạng test.
 
-### Key Types of Performance Testing
+### Đủ các thể loại Performance test
 
 Một số loại performace test thường dùng.
 
-<table>
-  <thead>
-    <tr>
-      <th>Term</th>
-      <th>Purpose</th>
-      <th>Notes</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>Load test</td>
-      <td>Để xác thực hệ hành vi của hệ thống dưới các điều kiện tải bình thường và cao điểm</td>
-      <td>
-        <ul>
-          <li>Load testing được tiến hành để các định xem hệ thống có đám ứng được mục tiêu về hiệu suất mong muốn. Các mục tiêu hiệu suất này thường được quy định trong thỏa thuận dịch vụ (SLA). Một load test cho phép do response times, throughput, rates, và resource - utilization levels, và để xác định break point trong hệ thống, giả định rằng break point này xuất hiện dưới tải cao nhất.</li>
-          <li>Kiểm tra độ bền của hệ thống (<b>Soak testing</b>) là một tập các load testing. Môt Soak testing là một loại của performance testing tập trung vào xác định hoặc xác thực các đặc tính hiệu suất của hệ thống dưới test khi phải tuân theo khối lượng công việc và khối lượng đấy tải dự kiến trong quá trình hoạt động trong thời gian dài</li>
-          <li><b>Soak testing</b> có thể được sử dụng để tính toán Mean Time Between Failure (MTPF), Mean Time to Failure (MTTF) và các metrics tương tự</li>
-        </ul>
-      </td>
-    </tr>
-    <tr>
-      <td>Stress test</td>
-      <td>Để xác định hoặc xác thực hành vi hệ thống khi bị đấy ra ngoài điều kiện tải bình thường và cao điểm</td>
-      <td>
-        <ul>
-          <li>Mục tiêu của Stress Test là phát hiện ra các lỗi hệ thống chỉ xuất hiện trong điều kiện tải cao. Những lỗi này có thể bao gồm những thứ như vấn đề đồng bộ hóa, race conditions và rò rỉ bộ nhớ. Stress test cho phép bạn xác định điểm yếu của hệ thống và hiển thị cách hệ thống hoạt động trong điều kiện tải khắc nghiệt.</li>
-          <li><b>Spike test</b> là một loại của Stress test. Spike test là một loại performance test tập trung vào việc xác định hoặc xác nhận các đặc tính hoạt động của hệ thống cần test khi chịu các kịch bản mô phỏng khối lượng công việc và khối lượng tải liên tục tăng lên vượt ngoài khả năng hoạt động dự kiến trong thời gian ngắn.</li>
-          <li><b>Biggest challenge:</b> Đảm bảo hệ thống vẫn bảo mật các dữ liệu nhạy cảm sau sự cố. Nếu một Stress test thành công, hệ thóng sẽ trở lại bình thường cùng với tất cả các thành phần của nó sau sự cố khủng khiếp nhất.</li>
-        </ul>
-      </td>
-    </tr>
-    <tr>
-      <td>Capacity test</td>
-      <td>Để xác định bao nhiêu user hoặc transations của hệ thống nhất định hỗ trợ nhưng vẫn đáp ứng được mục tiêu hiệu suất.</td>
-       <td>
-        <ul>
-          <li>Capacity test được tiến hành cùng với việc lập kế hoạch cho sự phát triển trong tương lai, chẳng hạn như tăng user base hoặc tăng khối lượng dữ liệu. Ví dụ: để đáp ứng các tải trong tương lai, cần biết có bao nhiêu tài nguyên bổ sung (như dung lượng bộ xử lý, sử dụng bộ nhớ, dung lượng đĩa hoặc băng thông mạng) cần thiết để hỗ trợ các mức sử dụng trong tương lai.</li>
-          <li>Capacity test giúp xác nhận một scaling strategy để xác định liệu hệ thống có nên scale up hoặc scale out</li>
-        </ul>
-      </td>
-    </tr>
-  </tbody>
-</table>
+| Loại           | Mục đích                                                                                                            | Chi Tiết                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+|----------------|---------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Load test      | Để xác thực hệ hành vi của hệ thông dưới các diều kiện tải bình thường và cao điểm                                  | <ul><li>Load testing được tiến hành để các định xem hệ thống có đám ứng được mục tiêu về hiệu suất mong muốn. Các mục tiêu hiệu suất này thường được quy định trong thỏa thuận dịch vụ (SLA). Một load test cho phép do response times, throughput, rates, và resource - utilization levels, và để xác định break point trong hệ thống, giả định rằng break point này xuất hiện dưới tải cao nhất.</li><li>Kiểm tra độ bền của hệ thống (<b>Soak testing</b>) là một tập các load testing. Môt Soak testing là một loại của performance testing tập trung vào xác định hoặc xác thực các đặc tính hiệu suất của hệ thống dưới test khi phải tuân theo khối lượng công việc và khối lượng đấy tải dự kiến trong quá trình hoạt động trong thời gian dài</li><li><b>Soak testing</b> có thể được sử dụng để tính toán Mean Time Between Failure (MTPF), Mean Time to Failure (MTTF) và các metrics tương tự</li></ul>        |
+| Stress test    | Để xác định hoặc xác thực hành vi hệ thống khi bị đấy ra ngoài điều kiện tải bình thường và cao điểm                | <ul><li>Mục tiêu của Stress Test là phát hiện ra các lỗi hệ thống chỉ xuất hiện trong điều kiện tải cao. Những lỗi này có thể bao gồm những thứ như vấn đề đồng bộ hóa, race conditions và rò rỉ bộ nhớ. Stress test cho phép bạn xác định điểm yếu của hệ thống và hiển thị cách hệ thống hoạt động trong điều kiện tải khắc nghiệt.</li><li><b>Spike test</b> là một loại của Stress test. Spike test là một loại performance test tập trung vào việc xác định hoặc xác nhận các đặc tính hoạt động của hệ thống cần test khi chịu các kịch bản mô phỏng khối lượng công việc và khối lượng tải liên tục tăng lên vượt ngoài khả năng hoạt động dự kiến trong thời gian ngắn.</li><li><b>Biggest challenge:</b> Đảm bảo hệ thống vẫn bảo mật các dữ liệu nhạy cảm sau sự cố. Nếu một Stress test thành công, hệ thóng sẽ trở lại bình thường cùng với tất cả các thành phần của nó sau sự cố khủng khiếp nhất.</li></ul> |
+| Capacity test	 | Để xác định bao nhiêu user hoặc transations của hệ thống nhất định hỗ trợ nhưng vẫn đáp ứng được mục tiêu hiệu suất | <ul><li>Capacity test được tiến hành cùng với việc lập kế hoạch cho sự phát triển trong tương lai, chẳng hạn như tăng user base hoặc tăng khối lượng dữ liệu. Ví dụ: để đáp ứng các tải trong tương lai, cần biết có bao nhiêu tài nguyên bổ sung (như dung lượng bộ xử lý, sử dụng bộ nhớ, dung lượng đĩa hoặc băng thông mạng) cần thiết để hỗ trợ các mức sử dụng trong tương lai.</li><li>Capacity test giúp xác nhận một scaling strategy để xác định liệu hệ thống có nên scale up hoặc scale out</li></ul>                                                                                                                                                                                                                                                                                                                                                                                                          |
 
 ### Performance test metrics
 
@@ -65,13 +37,13 @@ Một số loại performace test thường dùng.
 
 2. Component response times
 
-3. Resource utilizations
+3. Resource utilization's
 
 4. Volumes, capacities and rates
 
 5. Trends
 
-### Core Activities of Performance testing
+### Cần chuẩn bị nhưng gì?
 
 1. `Identify the Test Environment`. Xác định môi trường vật lý cho việc test và môi trường prod cũng như tools và tài
    nguyên sẵn có đến nhóm test. Môi trường vật lý bao gồm phần cứng, phần mềm, và cấu hình network. Có hiểu biết về môi
@@ -98,7 +70,7 @@ Một số loại performace test thường dùng.
 
 7. `Analyze Results, Report and Retest`
 
-### Formula of Main metrics
+### Công Thức tính Performance test
 
 Một số metrics chủ yếu và công thức tính cần quan tâm khi thực hiện performance testing.
 
@@ -113,6 +85,8 @@ Quy ước:
 `S` là tổng số request success
 
 `E` là tổng số request error
+
+> Công thức này được tìm được ở [K6](https://k6.io)
 
 <table>
   <thead>
@@ -191,7 +165,7 @@ Quy ước:
   </tbody>
 </table>
 
-### Additional Considerations
+### Một vài cách đánh giá về hệ thống sau khi thực hiện xong Performance test
 
 Một cách tiếp cận để xác định có hệ thống có chạy ổn định hay không để hợp nhất các số liệu là chạy ít nhất một kịch bản
 5 lần và áp dụng các quy tắc bên dưới.
@@ -209,7 +183,7 @@ Một cách tiếp cận để xác định có hệ thống có chạy ổn đ�
   quả còn lại của quá trình thực thi kiểm tra, nhưng kết quả cho thấy tất cả thời gian còn lại trong quá trình thực thi
   kiểm tra đó thì không.
 
-### Frequently Reported Performance Data
+### Report
 
 Dưới đây là dữ liệu được báo cáo thường xuyên nhất:
 
@@ -239,7 +213,7 @@ Dưới đây là dữ liệu được báo cáo thường xuyên nhất:
 
 5. Trends
 
-### Questions To Be An Answered By Report
+### Các câu hỏi cần được trả lời sau khi thực thiện performance test
 
 1. All Roles
 
@@ -328,3 +302,7 @@ Dưới đây là dữ liệu được báo cáo thường xuyên nhất:
         * Trend charts
 
         - Summary spreadsheets
+
+### Cuối cùng thì...!
+
+Thành thật là performance test khá là hay, có thể sẽ giúp anh em tăng lương đấy <img src="https://cdn3.emoji.gg/emojis/5408-kekez.png" class="emoji">

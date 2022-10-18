@@ -157,7 +157,8 @@ hr {
 .site-header {
     border-bottom: 1px solid #eaeaea;
     margin-top: -2rem;
-    max-width: 48rem
+    max-width: 48rem;
+    text-align: center;
 }
 
 .site-header p {
@@ -166,6 +167,10 @@ hr {
 
 .site-header .site-intro {
     font-size: 0.9rem
+}
+
+.site-header .site-nav {
+    font-weight: bold;
 }
 
 .smallcap {
@@ -178,10 +183,7 @@ hr {
     letter-spacing: 2px;
     background-color: #333;
     color: #eee;
-    padding-left: 0.5rem;
-    padding-right: 0.5rem;
-    padding-top: 0.2rem;
-    padding-bottom: 0.2rem
+    padding: 0.2rem 0.5rem;
 }
 
 .page-content {
@@ -197,6 +199,11 @@ hr {
     max-width: 48rem
 }
 
+.emoji {
+    width: 16px;
+}
+
+/*post-list*/
 .post-list {
     margin-left: 4em;
 }
@@ -221,6 +228,10 @@ hr {
     font-size: .875rem;
     color: #aaa;
     display: inline-block
+}
+
+.post-list .post-link {
+    font-weight: bold;
 }
 
 @media screen and (max-width: 600px) {
