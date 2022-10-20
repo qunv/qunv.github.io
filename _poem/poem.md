@@ -1,14 +1,17 @@
-<!-- START doctoc generated TOC please keep comment here to allow auto update -->
-<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
-
-- [Phụ xe](#phu-xe)
-- [Thanh Tiêu](#thanh-tieu)
-- [Tự sự](#tu-su)
-- [10 năm](#10-nam)
-- [Chốn nào](#chon-nao)
-- [LTT 24](#ltt-24)
-
-<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+<span class="poem-openBtn" style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776;</span>
+<div id="poem-myNav" class="poem-overlay">
+<a href="javascript:void(0)" class="poem-closebtn" onclick="closeNav()">&times;</a>
+<div class="poem-overlay-content">
+<ul>
+<li><a href="#phu-xe">Phụ xe</a></li>
+<li><a href="#thanh-tieu">Thanh Tiêu</a></li>
+<li><a href="#tu-su">Tự sự</a></li>
+<li><a href="#10-nam">10 năm</a></li>
+<li><a href="#chon-nao">Chốn nào</a></li>
+<li><a href="#ltt-24">LTT 24</a></li>
+</ul>
+</div>
+</div>
 
 [comment]: <> (# Poem)
 
