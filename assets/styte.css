@@ -408,6 +408,7 @@ hr {
 
 .poem-content img {
     border-radius: 3%;
+    max-width: 50%;
 }
 
 .poem-content h1, .poem-content h2, .poem-content h3, .poem-content h4, .poem-content h5, .poem-content h6 {
