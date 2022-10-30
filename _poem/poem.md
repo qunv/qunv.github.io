@@ -3,6 +3,7 @@
 <a href="javascript:void(0)" class="poem-closebtn" onclick="closeNav()">&times;</a>
 <div class="poem-overlay-content">
 <ul>
+<li><a href="#ngay-mua">Ngày mùa</a></li>
 <li><a href="#phu-xe">Phụ xe</a></li>
 <li><a href="#thanh-tieu">Thanh Tiêu</a></li>
 <li><a href="#tu-su">Tự sự</a></li>
@@ -14,6 +15,20 @@
 </div>
 
 [comment]: <> (# Poem)
+
+### Ngày mùa {#ngay-mua}
+
+Khi trời bẽn lẽn ửng hồng
+
+Bác trai bác gái ra đồng làm nương
+
+Có con chim sẻ ngày thường
+
+Kiếm tìm hạt thóc dặm đường sẻ bay
+
+![String mem](../../../../../images/poem/30102022.jpg)
+
+*30/10/2022*
 
 ### Phụ xe {#phu-xe}
 
