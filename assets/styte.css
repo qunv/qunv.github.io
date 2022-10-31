@@ -1,3 +1,9 @@
+:root {
+    --main-blue-color: #0645ad;
+    --main-white-color: #fff;
+    --main-tag-color: #aaa;
+    --main-tag-hover: #fff;
+}
 
 blockquote, body, dd, dl, figure, h1, h2, h3, h4, h5, h6, hr, ol, p, pre, ul {
     margin: 0;
@@ -46,12 +52,14 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 a {
-    color: #0645ad;
-    text-decoration: none
+    color: var(--main-blue-color);
+    text-decoration: underline;
 }
 
 a:hover {
-    text-decoration: underline
+    background-color: var(--main-blue-color);
+    color: var(--main-white-color);
+    text-decoration: none;
 }
 
 blockquote {
@@ -218,24 +226,21 @@ hr {
 }
 
 .post-list > li a {
-    color: #333;
-    text-decoration: none;
+    color: var(--main-blue-color);
+    text-decoration: underline;
     font-weight: normal
 }
 
 .post-list > li a:hover {
-    color: #0645ad;
-    text-decoration: underline
+    background-color: var(--main-blue-color);
+    color: var(--main-white-color);
+    text-decoration: none;
 }
 
 .post-list > li time {
     font-size: .875rem;
-    color: #aaa;
+    color: #27292a;
     display: inline-block
-}
-
-.post-list .post-link {
-    font-weight: bold;
 }
 
 @media screen and (max-width: 600px) {
@@ -246,6 +251,17 @@ hr {
 }
 
 /*tags*/
+.tag {
+    color: var(--main-tag-color);
+    text-decoration: underline;
+}
+
+.tag:hover {
+    background-color: var(--main-blue-color);
+    color: var(--main-tag-hover);
+    text-decoration: none;
+}
+
 .tags {
     margin-left: 4em;
 }
@@ -253,23 +269,6 @@ hr {
 .tags > li {
     margin-bottom: .5rem;
     margin-left: -2rem
-}
-
-.tags > li a {
-    color: #333;
-    text-decoration: none;
-    font-weight: normal
-}
-
-.tags > li a:hover {
-    color: #0645ad;
-    text-decoration: underline
-}
-
-.tags > li time {
-    font-size: .875rem;
-    color: #aaa;
-    display: inline-block
 }
 
 @media screen and (max-width: 600px) {
@@ -286,10 +285,6 @@ hr {
     margin-left: 5px;
     padding: 2px 10px;
     text-decoration: none;
-}
-
-.tag-title {
-    color: #0645ad
 }
 
 .post-header {
@@ -810,4 +805,3 @@ hr {
 .highlight .il {
     color: #2aa198
 }
-	
