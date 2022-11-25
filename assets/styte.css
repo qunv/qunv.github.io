@@ -5,6 +5,13 @@
     --main-tag-hover: #fff;
 }
 
+@font-face {
+    font-family: 'Apple Chancery';
+    font-weight: normal;
+    font-style: normal;
+    src: local('Apple Chancery'), url('/assets/fonts/Apple Chancery.woff') format('woff');
+}
+
 blockquote, body, dd, dl, figure, h1, h2, h3, h4, h5, h6, hr, ol, p, pre, ul {
     margin: 0;
     padding: 0
@@ -191,6 +198,8 @@ hr {
 }
 
 .smallcap a, .smallcap a:hover {
+    font-family: "Apple Chancery", serif;
+    font-weight: normal;
     text-decoration: none;
     letter-spacing: 2px;
     background-color: #333;
