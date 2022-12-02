@@ -201,6 +201,7 @@ hr {
     letter-spacing: 2px;
     color: #eee;
     padding: 0.2rem 0.5rem;
+    text-shadow: 0 0 0, 0 0 0;
 }
 
 .page-content {
