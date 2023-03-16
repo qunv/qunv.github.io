@@ -20,20 +20,20 @@
                 <a class="site-title" href="/">Joseph Q. Nguyen</a>
             </h1>
             <p class="site-nav">
-                <a href="/">cd~</a> /
-                <a href="/about">about</a> /
-                <a href="/tags">tags</a> /
-                <a href="/poem">poem</a> /
-                <a href="/rss">rss</a>
+                <a class="site-nav-el" href="/">cd~</a> /
+                <a class="site-nav-el" href="/about">about</a> /
+                <a class="site-nav-el" href="/tags">tags</a> /
+                <a class="site-nav-el" href="/poem">poem</a> /
+                <a class="site-nav-el" href="/rss">rss</a>
             </p>
     <h1 class="post-title" itemprop="name headline">Tổng hợp vài thứ về Apache Kafka</h1>
     <div class="post-meta">
         <div class="post-date">
-            <time datetime="2017-01-15T00:00:00+00:00" itemprop="datePublished">21 Jan 2021</time>
+            <time datetime="2017-01-15T00:00:00+00:00" itemprop="datePublished">2021-01-21</time>
         </div>
         <div class="post-tag">
             <i class="fa fa-tag fa-1x" aria-hidden="true"></i>
-                <a class="tag" href="/tags/event-streaming">#event-streaming</a>
+                <a class="tag" href="/tags/event-streaming" style="background: #67f5f5">#event-streaming</a>
         </div>
     </div>
         </section>
@@ -43,7 +43,7 @@
 <p>Tổng hợp từ nhiều nguồn</p>
 </blockquote>
 
-<h3>Kafka là gì?</h3>
+<h2>Kafka là gì?</h2>
 
 <p>Kafka là <code>event-streaming</code> platform (distributed message platform),
 bên publish dữ liệu được gọi là proceducer còn bên subcribe dữ liệu được gọi là consumer, trong toàn bộ hệ thống,
@@ -53,9 +53,9 @@ millions/sec).
 Queue
 và cả trên ổ đĩa đồng thời cũng replicate các message để tránh mất dữ liệu.</p>
 
-<h3>Một số đặc trưng của kafka</h3>
+<h2>Một số đặc trưng của kafka</h2>
 
-<h4>Distributed</h4>
+<h3>Distributed</h3>
 
 <p>Một distributed system được hiểu đơn giản là chia thành các machine làm việc cùng nhau và trên cùng một cluster dưới
 dạng
@@ -65,13 +65,13 @@ khác nhau đượi gọi là Broker
 
 <p>Tất nhiên, một Distributed system sẽ đáp ứng được khả năng mở rộng và khả năng chịu lỗi cao.</p>
 
-<h4>Horizontal scalable</h4>
+<h3>Horizontal scalable</h3>
 
 <p>Như đã nói ở trên, khả năng mở rộng đơn giản chỉ là “ném“ vào nhiều machine hơn, hay trong Kafka là tạo nhiều Broker
 hơn,
 trên thực tế việc việc thêm một broker thì không không yêu cầu thời gian chết (downtime)</p>
 
-<h4>Fault tolerant</h4>
+<h3>Fault tolerant</h3>
 
 <p>Do Kafka là một Distributed system, nên khả năng chịu lỗi là rất lớn. Ví dụ, một cụm Kafka được thiết kết bởi 5 node,
 nếu trong trường hợp leader node down thì một trong 4 nốt còn lại sẽ lên thay thế là leader để tiếp tục công việc.</p>
@@ -79,7 +79,7 @@ nếu trong trường hợp leader node down thì một trong 4 nốt còn lại
 <p>Một điều đáng lưu ý là khảng năng chịu lỗi sẽ được đánh đổi trực tiếp bằng hiệu năng. Một hệ thống có khả năng chịu lỗi
 thì hiệu suất càng kém.</p>
 
-<h4>Commit log</h4>
+<h3>Commit log</h3>
 
 <p>Là một khái niệm cốt lõi của Kafka, Commit log được hình dung là một data structure chỉ cho phép thêm mới record và
 không
@@ -99,9 +99,9 @@ lợi
 tìm kiếm trên tập 1GB.
 <img src="../../../../../images/2020-01-21-kafka-achitech.png" alt="Minion" /></p>
 
-<h3>Một số thành phần của Kafka</h3>
+<h2>Một số thành phần của Kafka</h2>
 
-<h4>Broker</h4>
+<h3>Broker</h3>
 
 <ul>
 <li><p>Là thành phần cốt lõi của Kafka</p></li>
@@ -113,7 +113,7 @@ tìm kiếm trên tập 1GB.
 <li><p>Duy trì việc replicate trên toàn bộ cluster</p></li>
 </ul>
 
-<h4>Producer</h4>
+<h3>Producer</h3>
 
 <ul>
 <li><p>Publish message tới một hoặc nhiều topic</p></li>
@@ -125,7 +125,7 @@ tìm kiếm trên tập 1GB.
 <li><p>Kafka duy trì thứ tự của Message trên mỗi partition chứ không phải trên toàn partition</p></li>
 </ul>
 
-<h4>Message</h4>
+<h3>Message</h3>
 
 <ul>
 <li><p>Kafka message chứa một mảng các bytes, ngoài ra nó có một metadata tùy chọn được gọi là Key.</p></li>
@@ -137,7 +137,7 @@ tìm kiếm trên tập 1GB.
 <li><p>Chú ý việc ghi dưới dạng các lô sẽ tăng thông lượng nhưng cũng tăng độ trễ, do đó cần cân đối điều này.</p></li>
 </ul>
 
-<h4>Consumer</h4>
+<h3>Consumer</h3>
 
 <ul>
 <li><p>Subcriber message từ một topic</p></li>
@@ -147,7 +147,7 @@ tìm kiếm trên tập 1GB.
 <li><p>2 consumer trong cùng một Group không thể cùng subcribe các messages trong cùng một partition.</p></li>
 </ul>
 
-<h4>Topic</h4>
+<h3>Topic</h3>
 
 <ul>
 <li><p>Có thể được xem như một folder của file system</p></li>
@@ -160,9 +160,9 @@ tìm kiếm trên tập 1GB.
 <li><p>Dữ liệu trên mỗi phân vùng đều được replicate tời những broker khác để đảm bảo khả năng chịu lỗi</p></li>
 </ul>
 
-<h3>Kafka hoạt động như thế nào?</h3>
+<h2>Kafka hoạt động như thế nào?</h2>
 
-<h4>Record flow</h4>
+<h3>Record flow</h3>
 
 <p><img src="../../../../../images/2021-01-21-kafka-concept/record-flow.jpg" alt="Record flow" /></p>
 
@@ -183,7 +183,7 @@ nào?</em></p>
 
 <p><img src="../../../../../images/2021-01-21-kafka-concept/multiple-producer.jpg" alt="Multiple Produce" /></p>
 
-<h4>Kafka replication</h4>
+<h3>Kafka replication</h3>
 
 <p>Dữ liệu trong partitition được sao chép từ <code>N</code> Broker khác nhau để đảm bảo tính toàn vẹn dữ liệu khi một trong các
 broker chết.</p>
@@ -195,13 +195,13 @@ nếu như vì một lý do nào đó mà partition leader dies.</p>
 
 <p><img src="../../../../../images/2021-01-21-kafka-concept/kafka-replication.jpg" alt="Multiple Produce" /></p>
 
-<h4>Zookeeper</h4>
+<h3>Zookeeper</h3>
 
 <p>Khi gửi một message vào Kafka tại một partition cụ thể, Kafka có một khái niệm là ZooKeeper giúp điều hướng message đến
 đúng partition leader. Đồng thời nếu một leader dies, Zookeeper có nhiệm vụ chọn một follower làm leader để tiếp tục đọc
 ghi dữ liệu.</p>
 
-<h4>Consuming data</h4>
+<h3>Consuming data</h3>
 
 <p>Như đã đề cập trước đó, khái niệm Consumer dùng để subcribe data.</p>
 
@@ -223,7 +223,7 @@ subcribe cùng một partion trên cùng một topic</p>
 sẽ subcribe các message ở các partition được chia sẻ trước đó.</em></p>
 </blockquote>
 
-<h4>Tại sao Kafka lại nhanh?</h4>
+<h3>Tại sao Kafka lại nhanh?</h3>
 
 <ol>
 <li>Độ trễ thấp trong việc thao tác file</li>

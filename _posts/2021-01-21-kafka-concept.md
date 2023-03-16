@@ -4,7 +4,7 @@
 
 > Tổng hợp từ nhiều nguồn
 
-### Kafka là gì?
+## Kafka là gì?
 
 Kafka là `event-streaming` platform (distributed message platform),
 bên publish dữ liệu được gọi là proceducer còn bên subcribe dữ liệu được gọi là consumer, trong toàn bộ hệ thống,
@@ -14,9 +14,9 @@ millions/sec).
 Queue
 và cả trên ổ đĩa đồng thời cũng replicate các message để tránh mất dữ liệu.
 
-### Một số đặc trưng của kafka
+## Một số đặc trưng của kafka
 
-#### Distributed
+### Distributed
 
 Một distributed system được hiểu đơn giản là chia thành các machine làm việc cùng nhau và trên cùng một cluster dưới
 dạng
@@ -26,13 +26,13 @@ khác nhau đượi gọi là Broker
 
 Tất nhiên, một Distributed system sẽ đáp ứng được khả năng mở rộng và khả năng chịu lỗi cao.
 
-#### Horizontal scalable
+### Horizontal scalable
 
 Như đã nói ở trên, khả năng mở rộng đơn giản chỉ là “ném“ vào nhiều machine hơn, hay trong Kafka là tạo nhiều Broker
 hơn,
 trên thực tế việc việc thêm một broker thì không không yêu cầu thời gian chết (downtime)
 
-#### Fault tolerant
+### Fault tolerant
 
 Do Kafka là một Distributed system, nên khả năng chịu lỗi là rất lớn. Ví dụ, một cụm Kafka được thiết kết bởi 5 node,
 nếu trong trường hợp leader node down thì một trong 4 nốt còn lại sẽ lên thay thế là leader để tiếp tục công việc.
@@ -40,7 +40,7 @@ nếu trong trường hợp leader node down thì một trong 4 nốt còn lại
 Một điều đáng lưu ý là khảng năng chịu lỗi sẽ được đánh đổi trực tiếp bằng hiệu năng. Một hệ thống có khả năng chịu lỗi
 thì hiệu suất càng kém.
 
-#### Commit log
+### Commit log
 
 Là một khái niệm cốt lõi của Kafka, Commit log được hình dung là một data structure chỉ cho phép thêm mới record và
 không
@@ -58,9 +58,9 @@ Lợi ích trên có ưu điểm rất lớn với lượng message scale theo t
 tìm kiếm trên tập 1GB.
 ![Minion](../../../../../images/2020-01-21-kafka-achitech.png)
 
-### Một số thành phần của Kafka
+## Một số thành phần của Kafka
 
-#### Broker
+### Broker
 
 - Là thành phần cốt lõi của Kafka
 
@@ -70,7 +70,7 @@ tìm kiếm trên tập 1GB.
 
 - Duy trì việc replicate trên toàn bộ cluster
 
-#### Producer
+### Producer
 
 - Publish message tới một hoặc nhiều topic
 
@@ -80,7 +80,7 @@ tìm kiếm trên tập 1GB.
 
 - Kafka duy trì thứ tự của Message trên mỗi partition chứ không phải trên toàn partition
 
-#### Message
+### Message
 
 - Kafka message chứa một mảng các bytes, ngoài ra nó có một metadata tùy chọn được gọi là Key.
 
@@ -90,7 +90,7 @@ tìm kiếm trên tập 1GB.
 
 - Chú ý việc ghi dưới dạng các lô sẽ tăng thông lượng nhưng cũng tăng độ trễ, do đó cần cân đối điều này.
 
-#### Consumer
+### Consumer
 
 - Subcriber message từ một topic
 
@@ -98,7 +98,7 @@ tìm kiếm trên tập 1GB.
 
 + 2 consumer trong cùng một Group không thể cùng subcribe các messages trong cùng một partition.
 
-#### Topic
+### Topic
 
 - Có thể được xem như một folder của file system
 
@@ -109,9 +109,9 @@ tìm kiếm trên tập 1GB.
 
 - Dữ liệu trên mỗi phân vùng đều được replicate tời những broker khác để đảm bảo khả năng chịu lỗi
 
-### Kafka hoạt động như thế nào?
+## Kafka hoạt động như thế nào?
 
-#### Record flow
+### Record flow
 
 ![Record flow](../../../../../images/2021-01-21-kafka-concept/record-flow.jpg)
 
@@ -130,7 +130,7 @@ Kafka xử lý điều này bằng cách tất cả các message có cùng một
 
 ![Multiple Produce](../../../../../images/2021-01-21-kafka-concept/multiple-producer.jpg)
 
-#### Kafka replication
+### Kafka replication
 
 Dữ liệu trong partitition được sao chép từ `N` Broker khác nhau để đảm bảo tính toàn vẹn dữ liệu khi một trong các
 broker chết.
@@ -142,13 +142,13 @@ nếu như vì một lý do nào đó mà partition leader dies.
 
 ![Multiple Produce](../../../../../images/2021-01-21-kafka-concept/kafka-replication.jpg)
 
-#### Zookeeper
+### Zookeeper
 
 Khi gửi một message vào Kafka tại một partition cụ thể, Kafka có một khái niệm là ZooKeeper giúp điều hướng message đến
 đúng partition leader. Đồng thời nếu một leader dies, Zookeeper có nhiệm vụ chọn một follower làm leader để tiếp tục đọc
 ghi dữ liệu.
 
-#### Consuming data
+### Consuming data
 
 Như đã đề cập trước đó, khái niệm Consumer dùng để subcribe data.
 
@@ -168,7 +168,7 @@ Khi thêm một lượng lớn consumer vựợt quá số lượng partition th
 > *Mỗi Consumer trong một group sẽ chia sẻ Partition cho nhau. Nên khi thêm một consumer mới vào group, consumer mới này
 sẽ subcribe các message ở các partition được chia sẻ trước đó.*
 
-#### Tại sao Kafka lại nhanh?
+### Tại sao Kafka lại nhanh?
 
 1. Độ trễ thấp trong việc thao tác file
 

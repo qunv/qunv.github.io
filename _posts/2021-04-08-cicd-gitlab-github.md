@@ -4,7 +4,7 @@
 
 > Automatic will help us more leisurely
 
-### Rambling a little
+## Rambling a little
 
 As a programmer, I really like creating automated programs and plenty there, it looks magic.
 
@@ -24,7 +24,7 @@ Not to mention, I had to push my all code on the Github with ``add``, ``commit``
 
 So, I look to CICD as a savior for my problem as a clever way from now.
 
-### Build a magic
+## Build a magic
 
 Humm, I don't mention CICD anymore because Google is number one.
 

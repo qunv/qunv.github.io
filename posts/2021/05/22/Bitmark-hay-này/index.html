@@ -20,34 +20,34 @@
                 <a class="site-title" href="/">Joseph Q. Nguyen</a>
             </h1>
             <p class="site-nav">
-                <a href="/">cd~</a> /
-                <a href="/about">about</a> /
-                <a href="/tags">tags</a> /
-                <a href="/poem">poem</a> /
-                <a href="/rss">rss</a>
+                <a class="site-nav-el" href="/">cd~</a> /
+                <a class="site-nav-el" href="/about">about</a> /
+                <a class="site-nav-el" href="/tags">tags</a> /
+                <a class="site-nav-el" href="/poem">poem</a> /
+                <a class="site-nav-el" href="/rss">rss</a>
             </p>
     <h1 class="post-title" itemprop="name headline">Bitmark hay này</h1>
     <div class="post-meta">
         <div class="post-date">
-            <time datetime="2017-01-15T00:00:00+00:00" itemprop="datePublished">22 May 2021</time>
+            <time datetime="2017-01-15T00:00:00+00:00" itemprop="datePublished">2021-05-22</time>
         </div>
         <div class="post-tag">
             <i class="fa fa-tag fa-1x" aria-hidden="true"></i>
-                <a class="tag" href="/tags/optimise">#optimise</a>
-                <a class="tag" href="/tags/bit">#bit</a>
+                <a class="tag" href="/tags/optimise" style="background: #c0e4c5">#optimise</a>
+                <a class="tag" href="/tags/bit" style="background: #b4d6db">#bit</a>
         </div>
     </div>
         </section>
         <section class="site-body">
     <div class="post-content">
-        <h3>Là lá la là la</h3>
+        <h2>Là lá la là la</h2>
 
 <p>Thật sự thì hồi đi học cũng học nhiều mấy thứ liên quan đến <code>bit</code>, cơ mà cho để nay thì chữ thầy chắc em gửi lại
 thầy rồi <img src="https://cdn3.emoji.gg/emojis/2324-pepelaugh.png" class="emoji">. Cho đến một ngày&hellip;
 vô tình đọc được một bài viết của bác <a href="https://www.ardanlabs.com/blog/2021/04/using-bitmasks-in-go.html">@MikiTebeka</a>
 Nên em sợ bác xóa bài cho nên em xin phép <code>make a note</code> một vài thứ về <a href="https://en.wikipedia.org/wiki/Mask_(computing)">Bitmark</a></p>
 
-<h3>Tự giải thích một vài khái niệm</h3>
+<h2>Tự giải thích một vài khái niệm</h2>
 
 <p>Nói về <code>bit</code>, ở đây được hiểu là một khái niệm thuộc về máy tính, máy tính hiểu được chúng ta là do nó đã translate sang
 <code>ngôn ngữ</code> của bản thân nó <code>bit</code>, và dị lắm, mỗi bit thì mang một trong 2 giá trị <code>0</code> hoặc <code>1</code>.
@@ -67,7 +67,7 @@ base 10 |128| 64| 32| 16| 8 | 4 | 2 | 1 |
 <p>Lưu ý rằng, scheme ở trên có nghĩa là số tối đa có thể được biểu thị bằng một byte là <code>255</code>, nó có nghĩa là tất cả các bit
 vị trí sẽ được điền bởi 1 và tổng của tất cả cơ số 10.</p>
 
-<h3>Các phép toán logic</h3>
+<h2>Các phép toán logic</h2>
 
 <p>Có một số thứ kiến các developer trở thành các nhà ảo thuật <img src="https://cdn3.emoji.gg/emojis/7694-pepe-fla.png" class="emoji"> đấy là các pháp toán trên bit: <code>AND</code>, <code>OR</code>, <code>NOT</code>, <code>SHIFT LEFT</code>,&hellip;</p>
 
@@ -118,7 +118,7 @@ và công thức là, <code>A &gt;&gt; n = A / (2^n)</code></p>
 <p>Phần hay nhất xin anh em đọc ở vài viết của bác <a href="https://www.ardanlabs.com/blog/2021/04/using-bitmasks-in-go.html">@MikiTebeka</a></p>
 </blockquote>
 
-<h3>So sánh một chút về chi phí bộ nhớ</h3>
+<h2>So sánh một chút về chi phí bộ nhớ</h2>
 
 <p>Làm một phép so sánh nhỏ khi dùng <code>[]string</code> và <code>bitmark</code> về chi phí bộ nhớ.</p>
 
@@ -131,7 +131,7 @@ tức (<code>O(n) memory space</code>).</p>
 
 <p>Đối với bitmark thì là <code>00000111</code> cơ số 2, hay 7 cho cơ số 10 10, do đó chi phí là 1 (<code>O(1) memory space</code>).</p>
 
-<h3>Pros and Cons</h3>
+<h2>Pros and Cons</h2>
 
 <p><strong>Pros</strong></p>
 
@@ -149,7 +149,7 @@ tức (<code>O(n) memory space</code>).</p>
 <li>Khó hiểu và khó maintain</li>
 </ul>
 
-<h3>Cuối cùng thì&hellip;!</h3>
+<h2>Cuối cùng thì&hellip;!</h2>
 
 <p>Bitmark hay đấy, nhưng mới áp dụng được có 1 lần <img src="https://cdn3.emoji.gg/emojis/9529-pepe.png" class="emoji"></p>
 

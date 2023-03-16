@@ -4,7 +4,7 @@
 
 > Tổng hợp từ nhiều nguồn.
 
-### Humm...!
+## Humm...!
 
 Chắc anh em cũng biết, tôi xuất thân từ con nhà nông, ra ngoài đời làm công
 việc `dọn vệ sinh` <img src="https://cdn3.emoji.gg/emojis/9204_PepeSad.png" class="emoji">,
@@ -14,14 +14,14 @@ mà team lại thiếu người làm nên tôi bị bếch đi nghiên cứu r�
 cho anh em
 <img src="https://cdn3.emoji.gg/emojis/2737-chill.png" class="emoji">
 
-### Performance test là gì?
+## Performance test là gì?
 
 Mục đích: Để xác định hoặc xác thực tốc độ, khả năng mở rộng và/hoặc độ tin cậy của hệ thống.
 
 Notes: Một performance test là một kĩ thuật test để xác định hoặc xác thực các đặc trưng về khả năng đáp ứng, tốc độ,
 khả năng mở rộng và/hoặc độc tin cậy của hệ thống dưới dạng test.
 
-### Đủ các thể loại Performance test
+## Đủ các thể loại Performance test
 
 Một số loại performace test thường dùng.
 
@@ -31,7 +31,7 @@ Một số loại performace test thường dùng.
 | Stress test    | Để xác định hoặc xác thực hành vi hệ thống khi bị đấy ra ngoài điều kiện tải bình thường và cao điểm                | <ul><li>Mục tiêu của Stress Test là phát hiện ra các lỗi hệ thống chỉ xuất hiện trong điều kiện tải cao. Những lỗi này có thể bao gồm những thứ như vấn đề đồng bộ hóa, race conditions và rò rỉ bộ nhớ. Stress test cho phép bạn xác định điểm yếu của hệ thống và hiển thị cách hệ thống hoạt động trong điều kiện tải khắc nghiệt.</li><li><b>Spike test</b> là một loại của Stress test. Spike test là một loại performance test tập trung vào việc xác định hoặc xác nhận các đặc tính hoạt động của hệ thống cần test khi chịu các kịch bản mô phỏng khối lượng công việc và khối lượng tải liên tục tăng lên vượt ngoài khả năng hoạt động dự kiến trong thời gian ngắn.</li><li><b>Biggest challenge:</b> Đảm bảo hệ thống vẫn bảo mật các dữ liệu nhạy cảm sau sự cố. Nếu một Stress test thành công, hệ thóng sẽ trở lại bình thường cùng với tất cả các thành phần của nó sau sự cố khủng khiếp nhất.</li></ul> |
 | Capacity test	 | Để xác định bao nhiêu user hoặc transations của hệ thống nhất định hỗ trợ nhưng vẫn đáp ứng được mục tiêu hiệu suất | <ul><li>Capacity test được tiến hành cùng với việc lập kế hoạch cho sự phát triển trong tương lai, chẳng hạn như tăng user base hoặc tăng khối lượng dữ liệu. Ví dụ: để đáp ứng các tải trong tương lai, cần biết có bao nhiêu tài nguyên bổ sung (như dung lượng bộ xử lý, sử dụng bộ nhớ, dung lượng đĩa hoặc băng thông mạng) cần thiết để hỗ trợ các mức sử dụng trong tương lai.</li><li>Capacity test giúp xác nhận một scaling strategy để xác định liệu hệ thống có nên scale up hoặc scale out</li></ul>                                                                                                                                                                                                                                                                                                                                                                                                          |
 
-### Performance test metrics
+## Performance test metrics
 
 1. Response time
 
@@ -43,7 +43,7 @@ Một số loại performace test thường dùng.
 
 5. Trends
 
-### Cần chuẩn bị nhưng gì?
+## Cần chuẩn bị nhưng gì?
 
 1. `Identify the Test Environment`. Xác định môi trường vật lý cho việc test và môi trường prod cũng như tools và tài
    nguyên sẵn có đến nhóm test. Môi trường vật lý bao gồm phần cứng, phần mềm, và cấu hình network. Có hiểu biết về môi
@@ -70,7 +70,7 @@ Một số loại performace test thường dùng.
 
 7. `Analyze Results, Report and Retest`
 
-### Công Thức tính Performance test
+## Công Thức tính Performance test
 
 Một số metrics chủ yếu và công thức tính cần quan tâm khi thực hiện performance testing.
 
@@ -165,7 +165,7 @@ Quy ước:
   </tbody>
 </table>
 
-### Một vài cách đánh giá về hệ thống sau khi thực hiện xong Performance test
+## Một vài cách đánh giá về hệ thống sau khi thực hiện xong Performance test
 
 Một cách tiếp cận để xác định có hệ thống có chạy ổn định hay không để hợp nhất các số liệu là chạy ít nhất một kịch bản
 5 lần và áp dụng các quy tắc bên dưới.
@@ -183,7 +183,7 @@ Một cách tiếp cận để xác định có hệ thống có chạy ổn đ�
   quả còn lại của quá trình thực thi kiểm tra, nhưng kết quả cho thấy tất cả thời gian còn lại trong quá trình thực thi
   kiểm tra đó thì không.
 
-### Report
+## Report
 
 Dưới đây là dữ liệu được báo cáo thường xuyên nhất:
 
@@ -213,7 +213,7 @@ Dưới đây là dữ liệu được báo cáo thường xuyên nhất:
 
 5. Trends
 
-### Các câu hỏi cần được trả lời sau khi thực thiện performance test
+## Các câu hỏi cần được trả lời sau khi thực thiện performance test
 
 1. All Roles
 
@@ -263,7 +263,7 @@ Dưới đây là dữ liệu được báo cáo thường xuyên nhất:
 
     - Can you capture metric X during the next test run?
 
-### What does the report need?
+## What does the report need?
 
 1. Raw data display
 
@@ -303,6 +303,6 @@ Dưới đây là dữ liệu được báo cáo thường xuyên nhất:
 
         - Summary spreadsheets
 
-### Cuối cùng thì...!
+## Cuối cùng thì...!
 
 Thành thật là performance test khá là hay, có thể sẽ giúp anh em tăng lương đấy <img src="https://cdn3.emoji.gg/emojis/5408-kekez.png" class="emoji">
