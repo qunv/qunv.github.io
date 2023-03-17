@@ -1,28 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
 <channel>
-<title>Joseph Q. Nguyen</title>
+<title>Javier Nguyen</title>
 <description>For the Future</description>
 <link>https://qunv.github.io/</link>
 <item>
 <title>Bitmark hay này</title>
-<link>https://qunv.github.io/posts/2021/05/22/Bitmark-hay-này</link>
+<link>https://qunv.github.io/posts/22/05/2021/Bitmark-hay-này</link>
 </item>
 <item>
 <title>Deploy code using CICD</title>
-<link>https://qunv.github.io/posts/2021/04/08/Deploy-code-using-CICD</link>
+<link>https://qunv.github.io/posts/08/04/2021/Deploy-code-using-CICD</link>
 </item>
 <item>
 <title>Tổng hợp vài thứ hay hay về Performance Test</title>
-<link>https://qunv.github.io/posts/2021/03/25/Tổng-hợp-vài-thứ-hay-hay-về-Performance-Test</link>
+<link>https://qunv.github.io/posts/25/03/2021/Tổng-hợp-vài-thứ-hay-hay-về-Performance-Test</link>
 </item>
 <item>
 <title>Tổng hợp vài thứ về Apache Kafka</title>
-<link>https://qunv.github.io/posts/2021/01/21/Tổng-hợp-vài-thứ-về-Apache-Kafka</link>
+<link>https://qunv.github.io/posts/21/01/2021/Tổng-hợp-vài-thứ-về-Apache-Kafka</link>
 </item>
 <item>
 <title>Lan man một tý</title>
-<link>https://qunv.github.io/posts/2020/10/15/Lan-man-một-tý</link>
+<link>https://qunv.github.io/posts/15/10/2020/Lan-man-một-tý</link>
 </item>
 </channel>
 </rss>

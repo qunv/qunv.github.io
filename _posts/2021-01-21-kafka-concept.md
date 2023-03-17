@@ -1,6 +1,10 @@
-[comment]: <> (Tổng hợp vài thứ về Apache Kafka)
+[title]: <> (Tổng hợp vài thứ về Apache Kafka)
 
-[comment]: <> (event-streaming)
+[description]: <> (Tổng hợp lại một số khái niệm về kafka, các thành phần quan trọng của kafka)
+
+[date]: <> (2021-01-21)
+
+[tags]: <> (event-streaming)
 
 > Tổng hợp từ nhiều nguồn
 

@@ -291,7 +291,7 @@ hr {
     width: 100%;
     border-radius: 10px;
     cursor: pointer;
-    font-size: 0.75em!important;
+    font-size: 0.75em !important;
     color: black;
     padding: 5px;
 }
@@ -563,7 +563,8 @@ hr {
 
 .copyright p {
     margin-top: 1rem;
-    color: #aaa
+    color: #aaa;
+    font-family: "Apple Chancery", serif;
 }
 
 .copyright p a, .copyright p a:visited {

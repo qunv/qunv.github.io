@@ -1,6 +1,10 @@
-[comment]: <> (Tổng hợp vài thứ hay hay về Performance Test)
+[title]: <> (Tổng hợp vài thứ hay hay về Performance Test)
 
-[comment]: <> (testing,self)
+[description]: <> (Tổng hợp lại các khái niệm về Performance Test và một số metric cần report khi thực hiện test)
+
+[date]: <> (2021-03-25)
+
+[tags]: <> (testing,self)
 
 > Tổng hợp từ nhiều nguồn.
 

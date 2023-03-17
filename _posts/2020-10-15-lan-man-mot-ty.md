@@ -1,6 +1,10 @@
-[comment]: <> (Lan man một tý)
+[title]: <> (Lan man một tý)
 
-[comment]: <> (self)
+[description]: <> (Đi qua một cách vui vẻ về cách mà tôi lựa chọn một số thứ cho bản thân)
+
+[date]: <> (2020-10-15)
+
+[tags]: <> (self)
 
 ## Nói gì giờ nhỉ?
 

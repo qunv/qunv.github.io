@@ -1,6 +1,10 @@
-[comment]: <> (Deploy code using CICD)
+[title]: <> (Deploy code using CICD)
 
-[comment]: <> (deloyment,cicd)
+[description]: <> (Setting up a sample CICD project to clearify concepts of stuff)
+
+[date]: <> (2021-04-08)
+
+[tags]: <> (deloyment,cicd)
 
 > Automatic will help us more leisurely
 
