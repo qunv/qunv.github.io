@@ -1,6 +1,6 @@
-[title]: <> (Deploy code using CICD)
+[title]: <> (Gitlab CI and Github workflow)
 
-[description]: <> (Setting up a sample CICD project to clearify concepts of stuff)
+[description]: <> (Setting up a sample CI project to clearify concepts of stuff)
 
 [date]: <> (2021-04-08)
 

@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Javier Nguyen</title>
+    <link rel="icon" href="/images/logo.png">
+    <link rel="stylesheet" href="/assets/styte.css">
+    <link rel="stylesheet" href="/assets/prism.css">
+    <link rel="alternate" type="application/rss+xml" title="Javier Nguyen" href="/rss.xml">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+<div class="page-content">
+    <div class="home">
+        <section class="site-header">
+            <h1 class="smallcap">
+                <a class="site-title" href="/">Javier Nguyen</a>
+            </h1>
+            <p class="site-nav">
+                <a class="site-nav-el" href="/">cd~</a> /
+                <a class="site-nav-el" href="/about">about</a> /
+                <a class="site-nav-el" href="/tags">tags</a> /
+                <a class="site-nav-el" href="/poem">poem</a> /
+                <a class="site-nav-el" href="/rss">rss</a>
+            </p>
+    <h1 class="post-title" itemprop="name headline">Redis Cluster và Docker</h1>
+    <div class="post-meta">
+        <div class="post-date">
+            <time datetime="2017-01-15T00:00:00+00:00" itemprop="datePublished">12/04/2023</time>
+        </div>
+        <div class="post-tag">
+            <i class="fa fa-tag fa-1x" aria-hidden="true"></i>
+                <a class="tag" href="/tags/redis" style="background: #c0e4c5">#redis</a>
+                <a class="tag" href="/tags/docker" style="background: #b4d6db">#docker</a>
+        </div>
+    </div>
+        </section>
+        <section class="site-body">
+    <div class="post-content">
+        <blockquote>
+<p>Docker sử dụng một kĩ thuật được gọi là <code>port mapping</code>: các chương trình chạy bên trong Docker containers có thể được
+expose bằng một port khác so với port được init bởi chương trình dó. Điều này hữu dụng khi chạy nhiều containers cùng
+một port, cùng lúc, cùng một server.
+Để docker có thể tương thích với Redis Cluster thì cần sử dụng <code>networking mode</code>.
+Follow <a href="https://redis.io/docs/management/scaling">https://redis.io/docs/management/scaling</a></p>
+</blockquote>
+
+<h2>Redis Highly Available Architectures</h2>
+
+<h3>Redis Master-Slave Replication</h3>
+
+<p>Sau khi application side write data đến một <code>master</code> note, tất cả data được replicate đến <code>replica</code> node, và data có thể
+được đồng bộ hóa với với nhiều node replica khác. Để tránh lỗi của từng node, cách thường làm là triển khai Redis trên
+nhiều server khác nhau và phân cụm chúng. Cách làm này dảm bảo độ tin cậy về dữ liệu và nếu một trong các redis server
+không hoạt động thì dữ liệu trong redis vẫn có thể được truy xuất từ các node khác, tuy nhiên thì dễ thấy một vấn đề
+nghiêm trọng là khi bất kì node master hoặc slave nào bị lỗi, cluster sẽ không thể read và write request, điều này cần
+được xử lý một cách thủ công để service có thể hoạt đông trở lại</p>
+
+<div class="mermaid">flowchart TD
+    A[master] --&gt; B[replica]
+    A --&gt; C[replica]
+    A --&gt; F[replica]
+    B --&gt; D[replica]
+    C --&gt; E[replica]
+</div>
+
+<h3>Redis Sentinel Mode</h3>
+
+<p><code>Sentinel sentry</code> chạy như một process độc lập để thông báo các lệnh tới tất cả các node redis trong một cluster theo 1
+interval và chờ response, do dó cho phép nó có thể theo dõi các node redis trên, để đảm bảo tính khả dụng của service,
+một số <code>sentiel</code> có thể cùng theo dõi các node trong một cluster. Khi một sentinel detect ra được rằng Master node không
+khả dụng và sau đó các sentinel khác cũng detect ra điều tương tự và số lượng sentinel detect được đạt đế một giá trị
+nhất định các sentinel sẽ vote xem node nào sẽ lên làm master. Ở mode này thì việc switch node trong một cụm đảm bảo việc
+không cần can thiệp một cách thử công khi node master không khả dụng. Tuy nhiên thì khi số lượng cluster đạt đến một mức
+độ nhất định thì việc bảo trì là một vấn đề lớn</p>
+
+<div class="mermaid">flowchart TD
+    A[sentinel 1] --&gt; B[master]
+    A --&gt; C[slave]
+    A --&gt; D[slave]
+    B --&gt; C
+    B --&gt; D
+    E[sentinel 2] --&gt; A
+    E --&gt; C
+    E --&gt; F[sentinel 3]
+    F --&gt; A
+    F --&gt; C
+    F --&gt; D
+    
+    style A fill:#f9f,color:black
+    style E fill:#f9f,color:black
+    style F fill:#f9f,color:black
+    linkStyle 0 stroke:#f9f
+    linkStyle 1 stroke:#f9f
+    linkStyle 2 stroke:#f9f
+    linkStyle 5 stroke:#f9f
+    linkStyle 6 stroke:#f9f
+    linkStyle 7 stroke:#f9f
+    linkStyle 8 stroke:#f9f
+    linkStyle 9 stroke:#f9f
+    linkStyle 10 stroke:#f9f
+</div>
+
+<blockquote>
+<p>I hack my brain with this above chart, I don&rsquo;t know the way to pretty this chart with mermaid</p>
+</blockquote>
+
+<p>Tóm tắt lại cả 2 mô hình <code>master-slave</code> và <code>sentinel</code> đều chia tách việc read-write và đảm bảo service có tính sẵn sàng
+tại một vài thời điểm.</p>
+
+<h2>Redis Cluster</h2>
+
+<p>Những ưu điểm chính của Redis cluster như sau:</p>
+
+<ol>
+<li><p>Pure native support, không cần bất kì hỗ trợ nào của bên thứ ba</p></li>
+
+<li><p>Khả năng tự động phân vùng cho các node riêng lẻ, do đó không có sự tập trung dữ liệu trên một node</p></li>
+
+<li><p>Một số node gặp sự cố sẽ không gây ảnh hưởng đến service và dữ liệu được khôi phục tự động</p></li>
+</ol>
+
+<p>Một câu hỏi đặt ra là Redis làm điều đó như thế nào?</p>
+
+<h3>Giao tiếp TCP giữa các node</h3>
+
+<p>Mỗi Redis node thường required 2 port TCP chạy đồng thời, một trong các port (default 6379) được dùng để tương tác với
+client, port khác được gọi là <code>bus port</code> (16379, thường là default port cộng với 10000), nó chịu trách nhiệm tương tác với các
+node khác thông qua giao thức nhị phân. Giao tiếp giữa các node bao gồm detect trạng thái của mỗi node, cập nhật cấu hình
+và transfer data. Do dó khi build một Redis Cluster, mỗi node redis phải mở 2 port TCP nếu không cluster sẽ không hoạt
+động bình thường.</p>
+
+<h3>Data sharding</h3>
+
+<p><strong><em>khi write data tới Redis, làm thế nào Redis transfer data giữa các node trong cụm?</em></strong></p>
+
+<p>Một Redis Cluster điển hình có 16384 <code>hash slots</code> và để tính toán <code>hash slot</code> cho key dã cho, redis đơn giản lấy
+<a href="https://en.wikipedia.org/wiki/Cyclic_redundancy_check">CRC16</a> của key modulo 16386.
+Ví dụ ở <a href="https://redis.io/docs/management/scaling/">Redis website</a> như sau:</p>
+
+<ul>
+<li><p>Node A chứa hash slots từ 0 - 5500</p></li>
+
+<li><p>Node B chứa hash slots từ 5501 - 11000</p></li>
+
+<li><p>Node C chưa hash slót từ 11001 - 16383</p></li>
+</ul>
+
+<h3>Data backup giữa các nodes</h3>
+
+<p>Như model <code>master-slave</code> được mô tả bên trên thì Redis sử dụng mô hình này để đảm bảo <code>high availablity</code>, do đó ngoài
+master node thì slave node cũng cần được cấu hinh, và Redis sẽ sharding data và bất kì node nào có thể. Ví dụ, có 3 node
+A, B và C ta có thể config A1, B1, C1 làm 3 slave node. Nếu master node không khả dụng, redis sẽ sử dụng slave node do đó
+data giữa master node và slave node là giống hệt.</p>
+
+<h3>Tham số cấu hình</h3>
+
+<pre><code class="language-yaml">cluster-enabled yes
+cluster-config-file
+cluster-node-timeout
+cluster-slave-validity-factor
+cluster-migration-barrier
+cluster-require-full-coverage
+cluster-allow-reads-when-down
+</code></pre>
+
+<ol>
+<li><code>cluster-enable</code> enable clustering or not</li>
+<li><code>cluster-config-file</code> file này không thể sửa đổi, mục đích để redis write node configuration</li>
+<li><code>cluster-node-timeout</code> Thời gian tối đa mà một node trong cụm không khả dụng</li>
+</ol>
+
+<blockquote>
+<p>To be continue</p>
+</blockquote>
+
+    </div>
+        </section>
+        <div class="copyright">
+            <p>Copyright &copy; 2021 by <a href="/">Javier Nguyen</a></p>
+        </div>
+    </div>
+</div>
+<script type="module">
+    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+
+    mermaid.initialize({startOnLoad: true});
+</script>
+<script src="/assets/prism.js"></script>
+<script src="/assets/style.js"></script>
+</body>
+</html>

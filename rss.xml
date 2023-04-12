@@ -5,12 +5,16 @@
 <description>For the Future</description>
 <link>https://qunv.github.io/</link>
 <item>
+<title>Redis Cluster và Docker</title>
+<link>https://qunv.github.io/posts/12/04/2023/Redis-Cluster-và-Docker</link>
+</item>
+<item>
 <title>Bitmark hay này</title>
 <link>https://qunv.github.io/posts/22/05/2021/Bitmark-hay-này</link>
 </item>
 <item>
-<title>Deploy code using CICD</title>
-<link>https://qunv.github.io/posts/08/04/2021/Deploy-code-using-CICD</link>
+<title>Gitlab CI and Github workflow</title>
+<link>https://qunv.github.io/posts/08/04/2021/Gitlab-CI-and-Github-workflow</link>
 </item>
 <item>
 <title>Tổng hợp vài thứ hay hay về Performance Test</title>

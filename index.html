@@ -38,6 +38,19 @@
         <section class="site-body">
     <ul class="post-list">
             <li class="post-link-container">
+                <a class="post-link" href="/posts/2023/01/12/Redis-Cluster-và-Docker">
+                    <h3 class="post-link-title">Redis Cluster và Docker</h3>
+                    <div class="post-link-subtext">
+                        Giới thiệu và một ví dụ nhỏ về Redis cluster hoạt động trong docker container
+                    </div>
+                </a>
+                <div class="post-link-metadata">
+                    <time datetime="2017-01-15T00:00:00+00:00">12/04/2023</time>
+                        <a class="tag" href="/tags/redis" style="background: #c0e4c5">#redis</a>
+                        <a class="tag" href="/tags/docker" style="background: #b4d6db">#docker</a>
+                </div>
+            </li>
+            <li class="post-link-container">
                 <a class="post-link" href="/posts/2021/01/22/Bitmark-hay-này">
                     <h3 class="post-link-title">Bitmark hay này</h3>
                     <div class="post-link-subtext">
@@ -46,21 +59,21 @@
                 </a>
                 <div class="post-link-metadata">
                     <time datetime="2017-01-15T00:00:00+00:00">22/05/2021</time>
-                        <a class="tag" href="/tags/optimise" style="background: #c0e4c5">#optimise</a>
-                        <a class="tag" href="/tags/bit" style="background: #b4d6db">#bit</a>
+                        <a class="tag" href="/tags/optimise" style="background: #a997ae">#optimise</a>
+                        <a class="tag" href="/tags/bit" style="background: #54c0f4">#bit</a>
                 </div>
             </li>
             <li class="post-link-container">
-                <a class="post-link" href="/posts/2021/01/08/Deploy-code-using-CICD">
-                    <h3 class="post-link-title">Deploy code using CICD</h3>
+                <a class="post-link" href="/posts/2021/01/08/Gitlab-CI-and-Github-workflow">
+                    <h3 class="post-link-title">Gitlab CI and Github workflow</h3>
                     <div class="post-link-subtext">
-                        Setting up a sample CICD project to clearify concepts of stuff
+                        Setting up a sample CI project to clearify concepts of stuff
                     </div>
                 </a>
                 <div class="post-link-metadata">
                     <time datetime="2017-01-15T00:00:00+00:00">08/04/2021</time>
-                        <a class="tag" href="/tags/deloyment" style="background: #a997ae">#deloyment</a>
-                        <a class="tag" href="/tags/cicd" style="background: #54c0f4">#cicd</a>
+                        <a class="tag" href="/tags/deloyment" style="background: #f1252f">#deloyment</a>
+                        <a class="tag" href="/tags/cicd" style="background: #9c90f4">#cicd</a>
                 </div>
             </li>
             <li class="post-link-container">
@@ -72,8 +85,8 @@
                 </a>
                 <div class="post-link-metadata">
                     <time datetime="2017-01-15T00:00:00+00:00">25/03/2021</time>
-                        <a class="tag" href="/tags/testing" style="background: #f1252f">#testing</a>
-                        <a class="tag" href="/tags/self" style="background: #9c90f4">#self</a>
+                        <a class="tag" href="/tags/testing" style="background: #67f5f5">#testing</a>
+                        <a class="tag" href="/tags/self" style="background: #3558b6">#self</a>
                 </div>
             </li>
             <li class="post-link-container">
@@ -85,7 +98,7 @@
                 </a>
                 <div class="post-link-metadata">
                     <time datetime="2017-01-15T00:00:00+00:00">21/01/2021</time>
-                        <a class="tag" href="/tags/event-streaming" style="background: #67f5f5">#event-streaming</a>
+                        <a class="tag" href="/tags/event-streaming" style="background: #f0db4f">#event-streaming</a>
                 </div>
             </li>
             <li class="post-link-container">
@@ -97,7 +110,7 @@
                 </a>
                 <div class="post-link-metadata">
                     <time datetime="2017-01-15T00:00:00+00:00">15/10/2020</time>
-                        <a class="tag" href="/tags/self" style="background: #9c90f4">#self</a>
+                        <a class="tag" href="/tags/self" style="background: #3558b6">#self</a>
                 </div>
             </li>
     </ul>
@@ -107,6 +120,11 @@
         </div>
     </div>
 </div>
+<script type="module">
+    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+
+    mermaid.initialize({startOnLoad: true});
+</script>
 <script src="/assets/prism.js"></script>
 <script src="/assets/style.js"></script>
 </body>
