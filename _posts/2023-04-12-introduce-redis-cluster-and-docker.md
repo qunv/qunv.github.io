@@ -120,8 +120,8 @@ data giữa master node và slave node là giống hệt.
 
 ```yaml
 cluster-enabled yes
-cluster-config-file
-cluster-node-timeout
+cluster-config-file nodes.conf # nodes.conf is default file
+cluster-node-timeout 5000
 cluster-slave-validity-factor
 cluster-migration-barrier
 cluster-require-full-coverage
@@ -132,5 +132,278 @@ cluster-allow-reads-when-down
 2. `cluster-config-file` file này không thể sửa đổi, mục đích để redis write node configuration
 3. `cluster-node-timeout` Thời gian tối đa mà một node trong cụm không khả dụng
 
-> To be continue
+### Example
+
+```mermaid
+flowchart LR
+  subgraph cluster_network 172.100.0.0/16
+    A[redis_node1<br>172.100.0.11] 
+    B[redis_node2<br>172.100.0.12]
+    C[redis_node3<br>172.100.0.13]
+    D[redis_node4<br>172.100.0.14]
+    E[redis_node5<br>172.100.0.15]
+    F[redis_node6<br>172.100.0.16]
+  end
+```
+
+Dựng một redis cluster gồm 6 node trong đó có 3 master và 3 slave, để các node có thể giao tiếp được với nhau cần sử dụng
+docker network là cầu nối. Một số file cần tạo như sau
+
+1. File config cho từng node của redis để có thể join vào cluster
+
+    Theo mặc định thì redis node sẽ đọc config ở file có tên là `redis.conf` làm mặc định, để khởi tạo container chứa 
+    config này từ local cần tạo các file tương ứng để map vào volumes trong container tuy nhiên thì vì lười nên ở đây tác
+    giả tạo 1 file config cho tất cả các node :v.
+   
+    Tạo 1 file có tên là `cluster_node.conf` ở thư mục hiện tại
+    ```conf
+    cluster-enabled yes
+    cluster-config-file nodes.conf
+    cluster-node-timeout 5000
+    appendonly yes
+    ```
+2. Tạo file `vas.env` để load các biến môi trường cần thiết cho từ node
+
+    ```env
+    REDIS_VERSION = 7.2-rc1-alpine
+    REDIS_PASSWORD = abcdefg@
+    REDIS_PORT1 = 56531
+    REDIS_PORT2 = 56532
+    REDIS_PORT3 = 56533
+    REDIS_PORT4 = 56534
+    REDIS_PORT5 = 56535
+    REDIS_PORT6 = 56536
+    ```
+   
+3. Viết một `docker-compose.yml`
+
+    ```yml
+    version: "3.8"
+    
+    services:
+      rc_node1:
+        image: redis:${REDIS_VERSION}
+        container_name: rc_node1
+        hostname: rc_node1
+        command: redis-server /usr/local/etc/redis/redis.conf
+        volumes:
+          - ./container-data/rc-node1:/data
+          - ./cluster_node.conf:/usr/local/etc/redis/redis.conf
+        ports:
+          - ${REDIS_PORT1}:6379
+        healthcheck:
+          test: [ "CMD", "redis-cli","-p","6379","-a","${REDIS_PASSWORD}"]
+          timeout: 10s
+          interval: 3s
+          retries: 10
+        networks:
+          cluster_network:
+            ipv4_address: 172.100.0.11   
+      rc_node2:
+        image: redis:${REDIS_VERSION}
+        container_name: rc_node2
+        hostname: rc_node2
+        command: redis-server /usr/local/etc/redis/redis.conf
+        volumes:
+          - ./container-data/rc-node2:/data
+          - ./cluster_node.conf:/usr/local/etc/redis/redis.conf
+        ports:
+          - ${REDIS_PORT2}:6379
+        healthcheck:
+          test: [ "CMD", "redis-cli","-p","6379","-a","${REDIS_PASSWORD}"]
+          timeout: 10s
+          interval: 3s
+          retries: 10
+        networks:
+          cluster_network:
+            ipv4_address: 172.100.0.12
+      rc_node3:
+        image: redis:${REDIS_VERSION}
+        container_name: rc_node3
+        hostname: rc_node3
+        command: redis-server /usr/local/etc/redis/redis.conf
+        volumes:
+          - ./container-data/rc-node3:/data
+          - ./cluster_node.conf:/usr/local/etc/redis/redis.conf
+        ports:
+          - ${REDIS_PORT3}:6379
+        healthcheck:
+          test: [ "CMD", "redis-cli","-p","6379","-a","${REDIS_PASSWORD}"]
+          timeout: 10s
+          interval: 3s
+          retries: 10
+        networks:
+          cluster_network:
+            ipv4_address: 172.100.0.13
+      rc_node4:
+        image: redis:${REDIS_VERSION}
+        container_name: rc_node4
+        hostname: rc_node4
+        command: redis-server /usr/local/etc/redis/redis.conf
+        volumes:
+          - ./container-data/rc-node4:/data
+          - ./cluster_node.conf:/usr/local/etc/redis/redis.conf
+        ports:
+          - ${REDIS_PORT4}:6379
+        healthcheck:
+          test: [ "CMD", "redis-cli","-p","6379","-a","${REDIS_PASSWORD}"]
+          timeout: 10s
+          interval: 3s
+          retries: 10
+        networks:
+          cluster_network:
+            ipv4_address: 172.100.0.14
+      rc_node5:
+        image: redis:${REDIS_VERSION}
+        container_name: rc_node5
+        hostname: rc_node5
+        command: redis-server /usr/local/etc/redis/redis.conf
+        volumes:
+          - ./container-data/rc-node5:/data
+          - ./cluster_node.conf:/usr/local/etc/redis/redis.conf
+        ports:
+          - ${REDIS_PORT5}:6379
+        healthcheck:
+          test: [ "CMD", "redis-cli","-p","6379","-a","${REDIS_PASSWORD}"]
+          timeout: 10s
+          interval: 3s
+          retries: 10
+        networks:
+          cluster_network:
+            ipv4_address: 172.100.0.15
+      rc_node6:
+        image: redis:${REDIS_VERSION}
+        container_name: rc_node6
+        hostname: rc_node6
+        command: redis-server /usr/local/etc/redis/redis.conf
+        volumes:
+          - ./container-data/rc-node6:/data
+          - ./cluster_node.conf:/usr/local/etc/redis/redis.conf
+        ports:
+          - ${REDIS_PORT6}:6379
+        healthcheck:
+          test: [ "CMD", "redis-cli","-p","6379","-a","${REDIS_PASSWORD}"]
+          timeout: 10s
+          interval: 3s
+          retries: 10
+        networks:
+          cluster_network:
+            ipv4_address: 172.100.0.16
+    
+      cluster_helper:
+        image: redis:${REDIS_VERSION}
+        command: redis-cli --cluster create 172.100.0.11:6379 172.100.0.12:6379 172.100.0.13:6379 172.100.0.14:6379 172.100.0.15:6379 172.100.0.16:6379 --cluster-replicas 1 --cluster-yes
+        depends_on:
+          rc_node1:
+            condition: service_healthy
+          rc_node2:
+            condition: service_healthy
+          rc_node3:
+            condition: service_healthy
+          rc_node4:
+            condition: service_healthy
+          rc_node5:
+            condition: service_healthy
+          rc_node6:
+            condition: service_healthy
+        networks:
+          - cluster_network
+    networks:
+      cluster_network:
+        name: cluster_network
+        driver: bridge
+        ipam:
+          driver: default
+          config:
+            - subnet: 172.100.0.0/24    
+              gateway: 172.100.0.1
+    ```
+Trong file docker-compose trên thì `networks` sẽ làm cầu để các node có thể giao tiếp, khi chạy lệnh
+
+```shell
+docker network ls
+```
+
+sẽ thấy một network có tên `cluster_network`, các redis node được khởi tạo bên trên sẽ join vào network này.
+
+```shell
+docker network inspect cluster_network
+```
+
+Với file env và file config được tạo từ trước và cùng một thư mục, chạy lệnh sau để khởi tạo các container cho từng redis
+node, trong đó container `cluster_hepler` sẽ giúp tạo một Redis Cluster thông qua ip của từng redis node
+
+```shell
+docker compose -p redis_cluster --env-file vars.env up -d --build --force-recreate
+```
+
+Và kế quả là:
+
+```shell
+[+] Running 7/7
+ ⠿ Container rc_node1                        Healthy
+ ⠿ Container rc_node6                        Healthy
+ ⠿ Container rc_node2                        Healthy
+ ⠿ Container rc_node3                        Healthy
+ ⠿ Container rc_node5                        Healthy
+ ⠿ Container rc_node4                        Healthy
+ ⠿ Container redis_cluster-cluster_helper-1  Started
+```
+
+`docker ps`
+
+```shell
+CONTAINER ID   IMAGE                  COMMAND                  CREATED              STATUS                        PORTS                                                  NAMES
+220a8b861895   redis:7.2-rc1-alpine   "docker-entrypoint.s…"   About a minute ago   Up About a minute (healthy)   0.0.0.0:56534->6379/tcp, :::56534->6379/tcp            rc_node4
+b27644e30476   redis:7.2-rc1-alpine   "docker-entrypoint.s…"   About a minute ago   Up About a minute (healthy)   0.0.0.0:56535->6379/tcp, :::56535->6379/tcp            rc_node5
+a54056fb498d   redis:7.2-rc1-alpine   "docker-entrypoint.s…"   About a minute ago   Up About a minute (healthy)   0.0.0.0:56533->6379/tcp, :::56533->6379/tcp            rc_node3
+d45a7366c257   redis:7.2-rc1-alpine   "docker-entrypoint.s…"   About a minute ago   Up About a minute (healthy)   0.0.0.0:56536->6379/tcp, :::56536->6379/tcp            rc_node6
+6bcd1b57ac70   redis:7.2-rc1-alpine   "docker-entrypoint.s…"   About a minute ago   Up About a minute (healthy)   0.0.0.0:56531->6379/tcp, :::56531->6379/tcp            rc_node1
+1715f9ad6460   redis:7.2-rc1-alpine   "docker-entrypoint.s…"   About a minute ago   Up About a minute (healthy)   0.0.0.0:56532->6379/tcp, :::56532->6379/tcp            rc_node2
+```
+
+Execute một node bất kì:
+
+```shell
+docker exec -it rc_node1 sh
+```
+
+Xem các node trong cluster
+
+```shell
+redis-cli cluster nodes
+
+a8d36895f669460b4db4a787e1a9955b3e40fe1d 172.100.0.15:6379@16379,,shard-id=d96bd4e1440127303c398b3913952f9e86be1690 slave 149ed140c6b0f982ac40f01963920d55de554394 0 1681472434286 1 connected
+149ed140c6b0f982ac40f01963920d55de554394 172.100.0.11:6379@16379,,shard-id=d96bd4e1440127303c398b3913952f9e86be1690 myself,master - 0 1681472432000 1 connected 0-5460
+0e289422a99cf727e24e614dcff81e172452b2e4 172.100.0.13:6379@16379,,shard-id=9277e1bffd91bde4d2b78063d49b8ae8c8ad2843 master - 0 1681472433582 3 connected 10923-16383
+48394b93342b1ae0f570ac965f846f7f30b96fc7 172.100.0.16:6379@16379,,shard-id=32f98cc6c890d051aea848220c34356abe37f94d slave 260bf8c09213bcd32a45d58a6b4733031f4678ae 0 1681472433000 2 connected
+bd563011a660a3e9e6e891e0f4446f89f4b3033c 172.100.0.14:6379@16379,,shard-id=9277e1bffd91bde4d2b78063d49b8ae8c8ad2843 slave 0e289422a99cf727e24e614dcff81e172452b2e4 0 1681472433298 3 connected
+260bf8c09213bcd32a45d58a6b4733031f4678ae 172.100.0.12:6379@16379,,shard-id=32f98cc6c890d051aea848220c34356abe37f94d master - 0 1681472433783 2 connected 5461-10922
+```
+
+Thêm một vài dữ liệu:
+
+```shell
+redis-cli -c -p 6379
+
+127.0.0.1:6379> set hihi haha
+-> Redirected to slot [9959] located at 172.100.0.12:6379
+OK
+```
+
+Sang `rc_node2` query data:
+
+```shell
+docker exec -it rc_node2 sh
+
+redis-cli -c -p 6379
+
+127.0.0.1:6379> get hihi
+"haha"
+127.0.0.1:6379>
+```
+
+Done setup :)))
+
+> TODO: Build a webservice to connect above cluster :)))
 
