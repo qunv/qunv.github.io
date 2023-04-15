@@ -438,9 +438,97 @@ redis-cli -c -p 6379
 
 <p>Done setup :)))</p>
 
-<blockquote>
-<p>TODO: Build a webservice to connect above cluster :)))</p>
-</blockquote>
+<h3>Go code to connect redis cluster</h3>
+
+<pre><code class="language-go">const letterBytes = &quot;abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ&quot;
+
+func randStringBytes(n int) string {
+	b := make([]byte, n)
+	for i := range b {
+		b[i] = letterBytes[rand.Intn(len(letterBytes))]
+	}
+	return string(b)
+}
+
+func main() {
+	rc := newRedisClient(&quot;172.100.0.11:6379,172.100.0.12:6379,172.100.0.13:6379,172.100.0.14:6379,172.100.0.15:6379,172.100.0.16:6379&quot;)
+	for i := 0; i &lt; 5; i++ {
+		key := randStringBytes(5)
+		value := randStringBytes(5)
+		fmt.Printf(&quot;value: %s\n&quot;, key)
+		err := rc.setKey(key, value, time.Minute*1)
+		if err != nil {
+			log.Fatalf(&quot;Error: %v&quot;, err.Error())
+		}
+		value, err = rc.getKey(key)
+		if err != nil {
+			log.Fatalf(&quot;Error: %v&quot;, err.Error())
+		}
+		fmt.Printf(&quot;get value: %s\n&quot;, key)
+	}
+}
+
+type redisClient struct {
+	c *redis.ClusterClient
+}
+
+func newRedisClient(hostnames string) *redisClient {
+	addr := strings.Split(hostnames, &quot;,&quot;)
+	c := redis.NewClusterClient(&amp;redis.ClusterOptions{
+		Addrs: addr,
+	})
+	if err := c.Ping().Err(); err != nil {
+		panic(&quot;Unable to connect to redis &quot; + err.Error())
+	}
+	return &amp;redisClient{
+		c: c,
+	}
+}
+
+func (client *redisClient) getKey(key string) (string, error) {
+	val, err := client.c.Get(key).Result()
+	if err == redis.Nil || err != nil {
+		return &quot;&quot;, err
+	}
+	return val, nil
+}
+
+func (client *redisClient) setKey(key string, value interface{}, expiration time.Duration) error {
+	cacheEntry, err := json.Marshal(value)
+	if err != nil {
+		return err
+	}
+	err = client.c.Set(key, cacheEntry, expiration).Err()
+	if err != nil {
+		return err
+	}
+	return nil
+}
+</code></pre>
+
+<p>Run đoạn chương trình lên và được kết quả là:</p>
+
+<pre><code class="language-shell">
+value: VlBzg
+get value: VlBzg
+value: whTHc
+get value: whTHc
+value: FDaFp
+get value: FDaFp
+value: EFfRs
+get value: EFfRs
+value: bCsNV
+get value: bCsNV
+</code></pre>
+
+<h2>Cái này có giúp bạn tăng lương không?</h2>
+
+<p><a href="https://news.ycombinator.com/item?id=3067434">May be</a></p>
+
+<p>Nhưng chúc mừng bạn đã đọc đến đây, trên chỉ là demo local cho redis cluster, việc setup để có thể dùng thực tế còn nhiều cái
+phải thực hiện, tuy nhiên thì đâu đấy cũng đã tìm được một chút hứng thú để nghiên cứu cái này.</p>
+
+<p>Happy coding &lt;3</p>
 
     </div>
         </section>

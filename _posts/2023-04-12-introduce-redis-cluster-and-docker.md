@@ -405,5 +405,96 @@ redis-cli -c -p 6379
 
 Done setup :)))
 
-> TODO: Build a webservice to connect above cluster :)))
+### Go code to connect redis cluster
 
+```go
+const letterBytes = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+
+func randStringBytes(n int) string {
+	b := make([]byte, n)
+	for i := range b {
+		b[i] = letterBytes[rand.Intn(len(letterBytes))]
+	}
+	return string(b)
+}
+
+func main() {
+	rc := newRedisClient("172.100.0.11:6379,172.100.0.12:6379,172.100.0.13:6379,172.100.0.14:6379,172.100.0.15:6379,172.100.0.16:6379")
+	for i := 0; i < 5; i++ {
+		key := randStringBytes(5)
+		value := randStringBytes(5)
+		fmt.Printf("value: %s\n", key)
+		err := rc.setKey(key, value, time.Minute*1)
+		if err != nil {
+			log.Fatalf("Error: %v", err.Error())
+		}
+		value, err = rc.getKey(key)
+		if err != nil {
+			log.Fatalf("Error: %v", err.Error())
+		}
+		fmt.Printf("get value: %s\n", key)
+	}
+}
+
+type redisClient struct {
+	c *redis.ClusterClient
+}
+
+func newRedisClient(hostnames string) *redisClient {
+	addr := strings.Split(hostnames, ",")
+	c := redis.NewClusterClient(&redis.ClusterOptions{
+		Addrs: addr,
+	})
+	if err := c.Ping().Err(); err != nil {
+		panic("Unable to connect to redis " + err.Error())
+	}
+	return &redisClient{
+		c: c,
+	}
+}
+
+func (client *redisClient) getKey(key string) (string, error) {
+	val, err := client.c.Get(key).Result()
+	if err == redis.Nil || err != nil {
+		return "", err
+	}
+	return val, nil
+}
+
+func (client *redisClient) setKey(key string, value interface{}, expiration time.Duration) error {
+	cacheEntry, err := json.Marshal(value)
+	if err != nil {
+		return err
+	}
+	err = client.c.Set(key, cacheEntry, expiration).Err()
+	if err != nil {
+		return err
+	}
+	return nil
+}
+```
+
+Run đoạn chương trình lên và được kết quả là:
+
+```shell
+
+value: VlBzg
+get value: VlBzg
+value: whTHc
+get value: whTHc
+value: FDaFp
+get value: FDaFp
+value: EFfRs
+get value: EFfRs
+value: bCsNV
+get value: bCsNV
+```
+
+## Cái này có giúp bạn tăng lương không?
+
+[May be](https://news.ycombinator.com/item?id=3067434)
+
+Nhưng chúc mừng bạn đã đọc đến đây, trên chỉ là demo local cho redis cluster, việc setup để có thể dùng thực tế còn nhiều cái
+phải thực hiện, tuy nhiên thì đâu đấy cũng đã tìm được một chút hứng thú để nghiên cứu cái này.
+
+Happy coding <3
