@@ -5,9 +5,9 @@
     --main-tag-hover: #fff;
     --color-hover: #f5f5f5;
     --main-background: #0f0f23;
-    --color-title: #525252;
+    --color-title: #22272a;
     --color-subheading: #8c8c8c;
-    --color-text: #495057;
+    --color-text: #22272a;
     --color-background: #fcfcfc;
     --color-heading: #2b2b2b;
     --font-brand-tertiary: NeutraText-Bold;
@@ -380,18 +380,22 @@ hr {
 }
 
 .post-content h1, .post-content h2, .post-content h3, .post-content h4, .post-content h5, .post-content h6 {
-    margin-top: 0.3rem;
+    margin-top: 1.3rem;
     font-weight: bold;
 }
 
-.post-content h1, .post-content h2 {
-    font-size: 1.75rem
+.post-content h2:hover::before {
+    position: absolute;
+    left: 0.35rem;
+    color: #0645ad;
+    content: "#";
+    font-weight: bold;
 }
 
 .post-content h3 {
     position: relative;
     display: block;
-    margin-top: 2rem;
+    margin-top: 1.3rem;
     margin-bottom: 0.5rem;
     text-transform: none;
     letter-spacing: normal;
@@ -399,7 +403,7 @@ hr {
     font-size: 1rem;
 }
 
-.post-content h3:before {
+.post-content h3:hover::before {
     position: absolute;
     left: -1rem;
     top: -3px;
