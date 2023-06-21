@@ -7,7 +7,7 @@ function closeNav() {
 }
 
 function setCookie(name, value, daysToLive) {
-    let cookie = name + "=" + encodeURIComponent(value);
+    let cookie = name + "=" + encodeURIComponent(value) + ";path=/";
     if(typeof daysToLive === "number") {
         cookie += "; max-age=" + (daysToLive*24*60*60);
     }
