@@ -10,22 +10,7 @@
     <link rel="stylesheet" href="/assets/prism.css">
     <link rel="alternate" type="application/rss+xml" title="Quan Nguyen" href="/rss.xml">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <script>
-        function changeTheme() {
-            const body = document.body
-            if (body.classList.contains("dark") === true) {
-                body.classList.remove("dark")
-                const stylesheet = document.getElementById('stylesheet');
-                stylesheet.setAttribute('href', '/assets/styte-light.css');
-                document.getElementById("fa-theme-switch").className = "fa fa-sun-o"
-            } else {
-                const stylesheet = document.getElementById('stylesheet');
-                stylesheet.setAttribute('href', '/assets/styte-dark.css');
-                body.classList.add("dark")
-                document.getElementById("fa-theme-switch").className = "fa fa-moon-o"
-            }
-        }
-    </script>
+    <script src="/assets/style.js"></script>
 </head>
 
 <body>
@@ -41,7 +26,7 @@
                 <a class="site-nav-el" href="/tags">tags</a> /
                 <a class="site-nav-el" href="/poem">poem</a> /
                 <a class="site-nav-el" href="/rss">rss</a> /
-                <a class="site-nav-el theme-switch" onclick="changeTheme()"><i id="fa-theme-switch" class="fa fa-sun-o"></i></a>
+                <a class="site-nav-el theme-switch" onclick="changeTheme('btnClick')"><i id="fa-theme-switch" class="fa fa-sun-o"></i></a>
             </p>
     <h1 class="post-title" itemprop="name headline">Lan man một tý</h1>
     <div class="post-meta">
@@ -104,6 +89,8 @@ mình mình đi đúng, tôi đang hạnh phúc lắm <img src="https://cdn3.emo
     mermaid.initialize({startOnLoad: true});
 </script>
 <script src="/assets/prism.js"></script>
-<script src="/assets/style.js"></script>
+<script>
+    changeTheme('load')
+</script>
 </body>
 </html>
