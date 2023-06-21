@@ -6,10 +6,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Quan Nguyen</title>
     <link rel="icon" href="/images/logo.png">
-    <link rel="stylesheet" href="/assets/styte.css">
+    <link id="stylesheet" rel="stylesheet" href="/assets/styte-light.css">
     <link rel="stylesheet" href="/assets/prism.css">
     <link rel="alternate" type="application/rss+xml" title="Quan Nguyen" href="/rss.xml">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script>
+        function changeTheme() {
+            const body = document.body
+            if (body.classList.contains("dark") === true) {
+                body.classList.remove("dark")
+                const stylesheet = document.getElementById('stylesheet');
+                stylesheet.setAttribute('href', '/assets/styte-light.css');
+                document.getElementById("fa-theme-switch").className = "fa fa-sun-o"
+            } else {
+                const stylesheet = document.getElementById('stylesheet');
+                stylesheet.setAttribute('href', '/assets/styte-dark.css');
+                body.classList.add("dark")
+                document.getElementById("fa-theme-switch").className = "fa fa-moon-o"
+            }
+        }
+    </script>
 </head>
 
 <body>
@@ -24,7 +40,8 @@
                 <a class="site-nav-el" href="/about">about</a> /
                 <a class="site-nav-el" href="/tags">tags</a> /
                 <a class="site-nav-el" href="/poem">poem</a> /
-                <a class="site-nav-el" href="/rss">rss</a>
+                <a class="site-nav-el" href="/rss">rss</a> /
+                <a class="site-nav-el theme-switch" onclick="changeTheme()"><i id="fa-theme-switch" class="fa fa-sun-o"></i></a>
             </p>
     <h1 class="post-title" itemprop="name headline">Tổng hợp vài thứ hay hay về Performance Test</h1>
     <div class="post-meta">

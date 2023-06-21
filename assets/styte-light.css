@@ -357,7 +357,8 @@ hr {
     letter-spacing: -1px;
     line-height: 1.2;
     margin-bottom: 0.5rem;
-    font-weight: bold
+    font-weight: bold;
+    color: var(--color-heading);
 }
 
 .post-meta .post-date, .post-meta .post-tag {
@@ -382,6 +383,7 @@ hr {
 .post-content h1, .post-content h2, .post-content h3, .post-content h4, .post-content h5, .post-content h6 {
     margin-top: 1.3rem;
     font-weight: bold;
+    color: var(--color-title);
 }
 
 .post-content h2:hover::before {
@@ -571,7 +573,7 @@ hr {
 }
 
 .copyright p a, .copyright p a:visited {
-    color: #6a6a6a
+    color: var(--color-heading)
 }
 
 .highlight {
