@@ -73,9 +73,9 @@ a {
 }
 
 blockquote {
-    color: #6a6a6a;
+    color: var(--color-text);;
     padding-left: 1rem;
-    border-left: 2px solid #eaeaea;
+    border-left: 2px solid var(--color-title);;
     font-style: italic;
     font-size: .795rem;
     margin-top: 1rem;
@@ -104,12 +104,17 @@ pre > code {
     color: inherit
 }
 
+table, th, td {
+    border: 1px dashed var(--color-title);;
+    padding: 10px;
+}
+
 table {
     width: 100%;
     max-width: 100%;
-    border-collapse: separate;
+    border-collapse: collapse;
     border-spacing: 0;
-    table-layout: fixed
+    table-layout: auto;
 }
 
 td, th {
@@ -120,12 +125,6 @@ td, th {
 th {
     text-align: left;
     vertical-align: bottom;
-    border-bottom: 2px solid #eaeaea
-}
-
-td {
-    vertical-align: top;
-    border-bottom: 1px solid #eaeaea
 }
 
 hr {
@@ -172,10 +171,14 @@ hr {
     background-image: linear-gradient(to right, #ff0 0, #ff0 100%)
 }
 
+.mermaid {
+    text-align: center;
+}
+
 .site-header {
     border-bottom: 1px solid #eaeaea;
     margin-top: -2rem;
-    max-width: 48rem;
+    max-width: 100%;
     text-align: center;
     padding-bottom: 10px;
 }
@@ -216,12 +219,12 @@ hr {
     padding: 2rem 1.5rem;
     margin: 1rem auto;
     box-sizing: border-box;
-    max-width: 48rem
+    max-width: 50%; 
 }
 
 .home section + section {
     margin-top: 2rem;
-    max-width: 48rem
+    max-width: 100% 
 }
 
 .emoji {
