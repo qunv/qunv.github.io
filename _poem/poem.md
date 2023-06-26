@@ -119,3 +119,17 @@ Thôn Đoàn Kết, xã Bình Minh
 Sinh viên Công Giáo Thái Bình thân thương
 
 *LTT24 - SVCG Thái Bình - Hà Nội*
+
+### Tiêu (#tieu)
+
+Một buổi xế chiều
+
+Ta nói tiếng yêu
+
+Mấy chăng ai hiểu
+
+"Của ít lòng nhiều"
+
+![String mem](../../../../../images/poem/longnhieu.jpg)
+
+*26/06/2023*
