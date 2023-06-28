@@ -10,6 +10,7 @@
 <li><a href="#10-nam">10 năm</a></li>
 <li><a href="#chon-nao">Chốn nào</a></li>
 <li><a href="#ltt-24">LTT 24</a></li>
+<li><a href="#tieu">LTT 24</a></li>
 </ul>
 </div>
 </div>
@@ -120,7 +121,7 @@ Sinh viên Công Giáo Thái Bình thân thương
 
 *LTT24 - SVCG Thái Bình - Hà Nội*
 
-### Tiêu (#tieu)
+### Tiêu {#tieu}
 
 Một buổi xế chiều
 
