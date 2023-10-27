@@ -2,6 +2,7 @@
 title =  "Phụ xe"
 date = "2022-10-19"
 summary = "Đi về thấy bạn phụ xe xinh quá"
+layout = "poem"
 +++
 
 ### Phụ xe {#phu-xe}

@@ -54,21 +54,23 @@ params:
   ShowCodeCopyButtons: true
   ShowRssButtonInSectionTermList: true
   ShowToc: true
+  indexSection: "posts"
+  listSection: [ "posts", "poetry" ]
   # comments: false
-  images: ["logo.png"]
+  images: [ "logo.png" ]
 
-#  profileMode:
-#    enabled: false
-#    title: Quan Nguyen
-#    imageUrl: "#"
-#    imageTitle: my image
-#    imageWidth: 120
-#    imageHeight: 120
-#    buttons:
-#      - name: Archives
-#        url: archives
-#      - name: Tags
-#        url: tags
+  #  profileMode:
+  #    enabled: false
+  #    title: Quan Nguyen
+  #    imageUrl: "#"
+  #    imageTitle: my image
+  #    imageWidth: 120
+  #    imageHeight: 120
+  #    buttons:
+  #      - name: Archives
+  #        url: archives
+  #      - name: Tags
+  #        url: tags
 
   homeInfoParams:
     Title: 'Hi there 👋'
@@ -130,7 +132,7 @@ markup:
     anchorLineNos: true
     codeFences: true
     guessSyntax: true
-#    lineNos: true
+    #    lineNos: true
     style: monokai
 
 privacy:

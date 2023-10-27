@@ -2,6 +2,7 @@
 title =  "Về Giáo Nghĩa"
 date = "2021-06-28"
 summary = "Ltt 24 - SVCG Thái Bình - Hà Nội"
+layout = "poem"
 +++
 
 ### Về Giáo Nghĩa {#ltt-24}

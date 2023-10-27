@@ -2,6 +2,7 @@
 title =  "Ngày mùa"
 date = "2022-10-30"
 summary = "Ngày mùa lên đô thị kiếm ăn"
+layout = "poem"
 +++
 
 ### Ngày mùa {#ngay-mua}

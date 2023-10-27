@@ -2,6 +2,7 @@
 title =  "Chốn nào"
 date = "2022-02-16"
 summary = "Một cô gái nào đó đi lấy chồng mà buồn buồn vì ngồi không, chẳng nhớ nữa"
+layout = "poem"
 +++
 
 ### Chốn nào {#chon-nao}
