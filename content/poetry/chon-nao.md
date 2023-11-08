@@ -5,8 +5,6 @@ summary = "Một cô gái nào đó đi lấy chồng mà buồn buồn vì ng�
 layout = "poem"
 +++
 
-### Chốn nào {#chon-nao}
-
 Nếu biết ngày mai em lấy chồng
 
 Thì nay anh đã chẳng đợi trông
@@ -22,6 +20,3 @@ Lạnh vắng hồn ai giữa mùa đông
 Mai rồi em có qua bên ấy
 
 Liệu rằng còn nhớ chốn này không?
-
-*16/02/2022*
-

@@ -5,8 +5,6 @@ summary = "Đi về thấy bạn phụ xe xinh quá"
 layout = "poem"
 +++
 
-### Phụ xe {#phu-xe}
-
 Cô em phụ lái dịu dàng
 
 Má hồng môi đỏ nhẹ nhàng anh ơi

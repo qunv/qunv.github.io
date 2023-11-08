@@ -5,8 +5,6 @@ summary = "Ngày mùa lên đô thị kiếm ăn"
 layout = "poem"
 +++
 
-### Ngày mùa {#ngay-mua}
-
 Khi trời bẽn lẽn ửng hồng
 
 Bác trai bác gái ra đồng làm nương

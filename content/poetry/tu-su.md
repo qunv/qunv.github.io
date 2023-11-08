@@ -5,8 +5,6 @@ summary = "Bên hiên nhà, nhìn người đi xa"
 layout = "poem"
 +++
 
-### Tự sự {#tu-su}
-
 Ánh đèn mờ dẫn ai qua phố nhỏ
 
 Giọt buồn sầu đôi mắt đỏ bỏ quên

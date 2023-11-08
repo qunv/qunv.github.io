@@ -2,22 +2,22 @@
 
 
 {{- if not .IsHome | and .Title }}
-<header class="page-header">
+<header class="page-header poetry">
     {{- partial "breadcrumbs.html" . }}
     <h1>Tập làm thơ</h1>
 </header>
 {{- end }}
 
 {{- range (where .Site.RegularPages "Section" "poetry") }}
-<article class="post-entry">
+<article class="post-entry poetry">
     <header class="entry-header">
-        <h2>
+        <h2 style="font-size: 30px">
             {{- .Title }}
         </h2>
     </header>
     {{- if (ne (.Param "hideSummary") true) }}
     <div class="entry-content">
-        <p>{{ .Summary | plainify | htmlUnescape }}</p>
+        <p style="font-size: 18px">{{ .Summary | plainify | htmlUnescape }}</p>
     </div>
     {{- end }}
     <a class="entry-link" aria-label="post link to {{ .Title | plainify }}" href="{{ .Permalink }}"></a>
