@@ -73,12 +73,9 @@ params:
   #        url: tags
 
   homeInfoParams:
-    Title: 'Hi there 👋'
+    Title: 'Just being me!'
     Content: >
-      Glad to see you in my blog.
-      
-      - I were not created this blog for anything special but I wanted to take notes of something interesting or something I learned. 
-      Hope you find something here and have a good day!
+      I'm not a robot so I know how to laugh :3
 
   socialIcons:
     - name: github
