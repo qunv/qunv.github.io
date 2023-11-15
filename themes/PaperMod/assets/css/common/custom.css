@@ -11,3 +11,16 @@
     font-family: 'Dancing Script', serif;
     font-size: 24px;
 }
+
+.pg-poetry {
+    background-image: url("https://picsum.photos/1920/1080/?blur");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.pg-poem {
+    background-color: var(--code-bg);
+    opacity: 0.8;
+    border-radius: 5%;
+}

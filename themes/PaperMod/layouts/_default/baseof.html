@@ -12,9 +12,16 @@
 {{- if eq site.Params.defaultTheme `dark` -}}
 {{- print " dark" }}
 {{- end -}}
+{{- if eq .Layout `poem` -}}
+{{- print " pg-poetry" }}
+{{- end -}}
 " id="top">
     {{- partialCached "header.html" . .Page -}}
-    <main class="main">
+    <main class="main
+{{- if eq .Layout `poem` -}}
+{{- print " pg-poem" }}
+{{- end -}}
+">
         {{- block "main" . }}{{ end }}
     </main>
     {{ partialCached "footer.html" . .Layout .Kind (.Param "hideFooter") (.Param "ShowCodeCopyButtons") -}}
