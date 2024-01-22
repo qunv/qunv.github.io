@@ -71,7 +71,7 @@ nghiêm trọng là khi bất kì node master hoặc slave nào bị lỗi, clus
 
 <h3>Redis Sentinel Mode</h3>
 
-<p><code>Sentinel sentry</code> chạy như một process độc lập để thông báo các lệnh tới tất cả các node redis trong một cluster theo 1
+<p><code>Sentinel sentry</code> chạy như một process độc lập để thông báo các lệnh tới tất cả các nodes redis trong một cluster theo 1
 interval và chờ response, do dó cho phép nó có thể theo dõi các node redis trên, để đảm bảo tính khả dụng của service,
 một số <code>sentiel</code> có thể cùng theo dõi các node trong một cluster. Khi một sentinel detect ra được rằng Master node không
 khả dụng và sau đó các sentinel khác cũng detect ra điều tương tự và số lượng sentinel detect được đạt đế một giá trị
