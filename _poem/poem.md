@@ -3,6 +3,7 @@
 <a href="javascript:void(0)" class="poem-closebtn" onclick="closeNav()">&times;</a>
 <div class="poem-overlay-content">
 <ul>
+<li><a href="#boi-hoi">Bồi hồi</a></li>
 <li><a href="#ngay-mua">Ngày mùa</a></li>
 <li><a href="#phu-xe">Phụ xe</a></li>
 <li><a href="#thanh-tieu">Thanh Tiêu</a></li>
@@ -16,6 +17,25 @@
 </div>
 
 [comment]: <> (# Poem)
+
+
+### Bồi hồi {#boi-hoi}
+
+Hai lăm tuổi đã qua rồi
+
+Mà sao lòng vẫn bồi hồi lo âu
+
+Nghĩ nhiều ích được mấy đâu
+
+Ngồi lâu lại thấy lo âu bồi hồi
+
+Nghĩ về những chuyện xa xôi
+
+Dửng dưng thấy lại bồi hồi lo âu
+
+Tiếc gì an ủi mấy câu
+
+Để cho lo bớt lo âu bồi hồi
 
 ### Ngày mùa {#ngay-mua}
 
