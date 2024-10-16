@@ -1,54 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Sắp đến ngày hội cựu đương tân rồi Lương ơi</title>
-    <link rel="stylesheet" href="./css/style.css">
-
+    <link rel="stylesheet" href="style.css"/>
+    <script src="script.js" defer></script>
 </head>
-
 <body>
-    <script src="script.js"></script>
-
-    <div class="container">
-        <h1><span>Sắp đến ngày hội cựu đương tân rồi Lương ơi </span>2024</h1>
-
-    <div id="countdown" class="countdown">
-        <div class="time">
-            <h2 id="days">00</h2>
-            <small>Days</small>
-        </div>
-
-        <div class="time">
-            <h2 id="hours">00</h2>
-            <small>Hours</small>
-        </div>
-
-        <div class="time">
-            <h2 id="minutes">00</h2>
-            <small>Minutes</small>
-        </div>
-
-        <div class="time">
-            <h2 id="seconds">00</h2>
-            <small>Seconds</small>
-        </div>
+<br><br>
+<img src="svcgtb.png" alt="svcgtb" style="height: 250px;width: 250px">
+<br>
+<div class="countdown-container">
+    <div class="countdown-el days-c">
+        <p class="big-text" id="days">0</p>
+        <span>days</span>
     </div>
+    <div class="countdown-el hours-c">
+        <p class="big-text" id="hours">0</p>
+        <span>hours</span>
     </div>
-
-
-    <script src="./js/script.js"></script>
-    <script src="./js/snowfall.min.js"></script>
-    <script>
-        snowFall.snow(document.querySelector("body"), {
-        round: true,
-        minSize: 1,
-        maxSize: 5,
-        shadow: true,
-        flakeCount: 50,
-        flakeColor: "#c7dfea"
-        });
-    </script>
+    <div class="countdown-el mins-c">
+        <p class="big-text" id="mins">0</p>
+        <span>mins</span>
+    </div>
+    <div class="countdown-el seconds-c">
+        <p class="big-text" id="seconds">0</p>
+        <span>seconds</span>
+    </div>
+</div>
+<h1>...Sắp đến ngày hội cựu đương tân rồi Lương ơi</h1>
 </body>
 </html>
