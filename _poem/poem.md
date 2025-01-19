@@ -3,7 +3,7 @@
 <a href="javascript:void(0)" class="poem-closebtn" onclick="closeNav()">&times;</a>
 <div class="poem-overlay-content">
 <ul>
-<li><a href="#boi-hoi">Bồi hồi</a></li>
+<!-- <li><a href="#boi-hoi">Bồi hồi</a></li> -->
 <li><a href="#ngay-mua">Ngày mùa</a></li>
 <li><a href="#phu-xe">Phụ xe</a></li>
 <li><a href="#thanh-tieu">Thanh Tiêu</a></li>
@@ -18,8 +18,20 @@
 
 [comment]: <> (# Poem)
 
+### Chuyện
 
-### Bồi hồi {#boi-hoi}
+Tiết xuân vương vấn mấy đông mùa
+
+Trên bàn hạt nắng chẳng ai mua
+
+Chuông chiều Chúa nhật tâm tư vội
+
+Thấy quyển tương tư ngợ gió lùa
+
+![String mem](../../../../../images/poem/chuyen.jpg)
+
+
+<!-- ### Bồi hồi {#boi-hoi}
 
 Hai lăm tuổi đã qua rồi
 
@@ -35,7 +47,7 @@ Dửng dưng thấy lại bồi hồi lo âu
 
 Tiếc gì an ủi mấy câu
 
-Để cho lo bớt lo âu bồi hồi
+Để cho lo bớt lo âu bồi hồi -->
 
 ### Ngày mùa {#ngay-mua}
 
